@@ -1,0 +1,20 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace DataBaseMVCApplication.Domain
+{
+   public class Order:BaseEntity
+    {
+        public long SellerId { get; set; }
+        public Seller Seller { get; set; }
+        public bool IsDeliver { get; set; }
+        public bool IsSetup { get; set; }
+        public DateTime OrderDate { get; set; }
+        public DateTime DeliverDate { get; set; }
+        public DateTime SetupDate { get; set; }
+        public double Price { get; set; }
+    }
+}
