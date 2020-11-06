@@ -51,6 +51,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BaseRepository.cs" />
     <Compile Include="Migrations\202011061237113_FirstMigration.cs" />
     <Compile Include="Migrations\202011061237113_FirstMigration.designer.cs">
       <DependentUpon>202011061237113_FirstMigration.cs</DependentUpon>

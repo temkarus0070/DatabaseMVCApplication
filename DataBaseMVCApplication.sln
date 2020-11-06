@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataBaseMVCApplication.Doma
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataBaseMVCApplication.Infractracure.Data", "DataBaseMVCApplication.Infractracure.Data\DataBaseMVCApplication.Infractracure.Data.csproj", "{3D36F408-5C3C-404C-8C68-ACD1F739D02E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataBaseMVCApplication.Services", "DataBaseMVCApplication.Services\DataBaseMVCApplication.Services.csproj", "{A80E387F-C869-432E-84DA-ACA932BA1D9C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{3D36F408-5C3C-404C-8C68-ACD1F739D02E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3D36F408-5C3C-404C-8C68-ACD1F739D02E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3D36F408-5C3C-404C-8C68-ACD1F739D02E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A80E387F-C869-432E-84DA-ACA932BA1D9C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A80E387F-C869-432E-84DA-ACA932BA1D9C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A80E387F-C869-432E-84DA-ACA932BA1D9C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A80E387F-C869-432E-84DA-ACA932BA1D9C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
