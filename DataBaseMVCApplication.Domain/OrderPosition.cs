@@ -6,10 +6,13 @@ using System.Threading.Tasks;
 
 namespace DataBaseMVCApplication.Domain
 {
-   public class OrderPosition:BaseEntity
+   public partial class OrderPosition
     {
-        public long OrderId { get; set; }
-        public Order Order { get; set; }
+        public long OrderPositionId { get; set; }
+        public Nullable<long> OrderId { get; set; }
+        public virtual Order Order { get; set; }
+        public Nullable<long> WindowId { get; set; }
+        public virtual Window Window { get; set; }
         public double Length { get; set; }
         public double Width { get; set; }
     }

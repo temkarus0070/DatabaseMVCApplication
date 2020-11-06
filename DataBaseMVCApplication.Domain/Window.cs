@@ -6,10 +6,12 @@ using System.Threading.Tasks;
 
 namespace DataBaseMVCApplication.Domain
 {
-    public class Window:BaseEntity
+    public class Window
     {
-        public long ManufactorId { get; set; }
-        public Manufactor Manufactor { get; set; }
+
+        public long WindowId { get; set; }
+        public Nullable<long> ManufactorId { get; set; }
+        public virtual Manufactor Manufactor { get; set; }
         public double Price { get; set; }
         public string Color { get; set; }
         public bool Having { get; set; }

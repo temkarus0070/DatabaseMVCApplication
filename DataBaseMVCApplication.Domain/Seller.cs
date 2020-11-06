@@ -6,11 +6,19 @@ using System.Threading.Tasks;
 
 namespace DataBaseMVCApplication.Domain
 {
-   public class Seller:BaseEntity
+    public partial class Seller
     {
+        public Seller()
+        {
+            this.Orders = new HashSet<Order>();
+        }
+
+        public long SellerId{get;set;}
         public string FIO { get; set; }
         public string Phone { get; set; }
         public string Email { get; set; }
         public double PercentFromOrder { get; set; }
+
+        public ICollection<Order> Orders { get; set; }
     }
 }

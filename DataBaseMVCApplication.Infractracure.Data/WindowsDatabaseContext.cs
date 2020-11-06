@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DataBaseMVCApplication.Infractracure.Data
 {
-    public class DatabaseContext:DbContext
+    public class WindowsDatabaseContext:DbContext
     {
         public DbSet<Buyer> Buyers { get; set; }
         public DbSet<Manufactor> Manufactors { get; set; }

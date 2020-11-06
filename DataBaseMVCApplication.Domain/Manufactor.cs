@@ -6,11 +6,18 @@ using System.Threading.Tasks;
 
 namespace DataBaseMVCApplication.Domain
 {
-    public class Manufactor:BaseEntity
+    public partial class Manufactor
     {
+        public Manufactor()
+        {
+            this.Windows = new HashSet<Window>();
+        }
+
+        public int ManufactorId { get; set; }
         public string Name { get; set; }
         public string Address { get; set; }
         public string Phone { get; set; }
         public string Email { get; set; }
+        public virtual ICollection<Window> Windows { get; set; }
     }
 }
