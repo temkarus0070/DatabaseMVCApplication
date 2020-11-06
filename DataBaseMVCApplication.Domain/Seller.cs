@@ -6,14 +6,12 @@ using System.Threading.Tasks;
 
 namespace DataBaseMVCApplication.Domain
 {
-    public partial class Seller
+    public partial class Seller:BaseEntity
     {
         public Seller()
         {
             this.Orders = new HashSet<Order>();
         }
-
-        public long SellerId{get;set;}
         public string FIO { get; set; }
         public string Phone { get; set; }
         public string Email { get; set; }

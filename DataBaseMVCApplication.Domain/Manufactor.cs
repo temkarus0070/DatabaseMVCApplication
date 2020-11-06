@@ -6,14 +6,13 @@ using System.Threading.Tasks;
 
 namespace DataBaseMVCApplication.Domain
 {
-    public partial class Manufactor
+    public partial class Manufactor:BaseEntity
     {
         public Manufactor()
         {
             this.Windows = new HashSet<Window>();
         }
 
-        public int ManufactorId { get; set; }
         public string Name { get; set; }
         public string Address { get; set; }
         public string Phone { get; set; }

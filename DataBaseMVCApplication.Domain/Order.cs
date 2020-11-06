@@ -1,21 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace DataBaseMVCApplication.Domain
 {
-   public partial class Order
+   public partial class Order:BaseEntity
     {
         public Order()
         {
             this.OrderPositions = new HashSet<OrderPosition>();
         }
-
-        public long OrderId { get; set; }
-        public Nullable<long> SellerId { get; set; }
-        public Nullable<long> BuyerId { get; set; }
+        [ForeignKey("Seller")]
+        public long SellerId { get; set; }
+        [ForeignKey("Buyer")]
+        public long BuyerId { get; set; }
         public virtual Seller Seller { get; set; }
         public virtual Buyer Buyer { get; set; }
         public bool IsDeliver { get; set; }

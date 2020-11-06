@@ -1,16 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace DataBaseMVCApplication.Domain
 {
-    public class Window
+    public class Window:BaseEntity
     {
-
-        public long WindowId { get; set; }
-        public Nullable<long> ManufactorId { get; set; }
+        [ForeignKey("Manufactor")]
+        public long ManufactorId { get; set; }
         public virtual Manufactor Manufactor { get; set; }
         public double Price { get; set; }
         public string Color { get; set; }
