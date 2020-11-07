@@ -24,8 +24,9 @@ namespace DataBaseMVCApplication.Services
             return windowRepository.Get();
         }
 
-        public void AddWindow(Window window)
+        public void AddWindow(Window window,Manufactor manufactor)
         {
+            window.Manufactor = manufactor;
             windowRepository.Create(window);
         }
 
