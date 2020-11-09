@@ -10,35 +10,49 @@ namespace DataBaseMVCApplication.Services
 {
     public class WindowsServices
     {
-        private BaseRepository<Window> windowRepository;
-        private WindowsDatabaseContext context;
+        private Repositories repositories;
 
         public WindowsServices()
         {
-            context = new WindowsDatabaseContext();
-            windowRepository = new BaseRepository<Window>(context);
+            repositories = new Repositories();
         }
 
         public IEnumerable<Window> GetWindows()
         {
-            return windowRepository.Get();
+            return repositories.windowRepository.Get();
         }
 
-        public void AddWindow(Window window,Manufactor manufactor)
+        public void AddWindow(WindowDto windowDto)
         {
-            window.Manufactor = manufactor;
-            windowRepository.Create(window);
+            repositories.windowRepository.Create(Convert(windowDto,false));
         }
 
 
-        public void DeleteWindow(Window window)
+        public void DeleteWindow(long windowId)
         {
-            windowRepository.Delete(window);
+            repositories.windowRepository.Delete(windowId));
         }
 
-        public void EditWindow(Window window)
+        public void EditWindow(WindowDto window)
         {
-            windowRepository.Update(window);
+            repositories.windowRepository.Update(Convert(window,true));
+        }
+
+        private Window Convert(WindowDto windowDto,bool isUpdate)
+        {
+            var window = new Window()
+            {
+                Color = windowDto.Color,
+                Description = windowDto.Description,
+                Having = windowDto.Having,
+                Image = windowDto.Image,
+                 ManufactorId = windowDto.ManufactorId,
+                 Manufactor = repositories.manufactorRepository.GetById(windowDto.ManufactorId),
+                  Price = windowDto.Price
+            };
+            if (isUpdate)
+                window.Id = windowDto.Id;
+            return window;
         }
     }
 }

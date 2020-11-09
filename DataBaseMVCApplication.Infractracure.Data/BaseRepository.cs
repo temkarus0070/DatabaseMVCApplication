@@ -34,7 +34,7 @@ namespace DataBaseMVCApplication.Infractracure.Data
             SaveChanges();
         }
 
-        public virtual void Delete(object id)
+        public virtual void Delete(long id)
         {
             TEntity entityToDelete = dbSet.Find(id);
             Delete(entityToDelete);

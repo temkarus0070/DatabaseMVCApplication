@@ -10,28 +10,26 @@ namespace DataBaseMVCApplication.Services
 {
   public class BuyerService
     {
-        private BaseRepository<Buyer> buyerRepository;
-        private WindowsDatabaseContext context;
+        private Repositories repositories;
 
         public BuyerService()
         {
-            context = new WindowsDatabaseContext();
-            this.buyerRepository = new BaseRepository<Buyer>(context);
+            repositories = new Repositories();
         }
 
         public void AddBuyer(Buyer buyer)
         {
-            buyerRepository.Create(buyer);
+            repositories.buyerRepository.Create(buyer);
         }
 
         public void EditBuyer(Buyer buyer)
         {
-            buyerRepository.Update(buyer);
+            repositories.buyerRepository.Update(buyer);
         }
 
-        public void DeleteBuyer(Buyer buyer)
+        public void DeleteBuyer(long buyerId)
         {
-            buyerRepository.Delete(buyer);
+            repositories.buyerRepository.Delete(buyerId);
         }
     }
 }

@@ -8,32 +8,49 @@ using System.Threading.Tasks;
 
 namespace DataBaseMVCApplication.Services
 {
-   public class OrderService
+    public class OrderService
     {
-        private BaseRepository<Order> orderRepository;
-        private WindowsDatabaseContext context;
+        private Repositories repositories;
 
         public OrderService()
         {
-            context = new WindowsDatabaseContext();
-            this.orderRepository = new BaseRepository<Order>(context);
+            repositories = new Repositories();
         }
 
-        public void AddOrder(Order order,Buyer buyer,Seller seller)
+        public void AddOrder(OrderDto orderDto)
         {
-            order.Buyer = buyer;
-            order.Seller = seller;
-            orderRepository.Create(order);
+            repositories.orderRepository.Create(Convert(orderDto,false));
         }
 
-        public void EditOrder(Order order)
+        public void EditOrder(OrderDto orderDto)
         {
-            orderRepository.Update(order);
+            repositories.orderRepository.Update(Convert(orderDto,true));
         }
 
-        public void DeleteOrder(Order order)
+        public void DeleteOrder(OrderDto orderDto)
         {
-            orderRepository.Delete(order);
+            repositories.orderRepository.Delete(Convert(orderDto,true));
+        }
+
+        private Order Convert(OrderDto orderDto,bool isUpdate)
+        {
+            Order order = new Order()
+            {
+                Buyer = repositories.buyerRepository.GetById(orderDto.BuyerId),
+                BuyerId = orderDto.BuyerId,
+                DeliverDate = orderDto.DeliverDate,
+                IsDeliver = orderDto.IsDeliver,
+                IsSetup = orderDto.IsSetup,
+                OrderDate = orderDto.OrderDate,
+                Price = orderDto.Price,
+                Seller = repositories.sellerRepository.GetById(orderDto.SellerId),
+                SellerId = orderDto.SellerId,
+                SetupDate = orderDto.SetupDate,
+                OrderPositions = orderDto.OrderPositions
+            };
+            if (isUpdate)
+                order.Id = orderDto.Id;
+            return order;
         }
     }
 }

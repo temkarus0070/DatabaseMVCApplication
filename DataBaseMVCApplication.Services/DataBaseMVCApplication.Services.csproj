@@ -41,9 +41,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BuyerDto.cs" />
     <Compile Include="BuyerService.cs" />
+    <Compile Include="OrderDto.cs" />
     <Compile Include="OrderService.cs" />
+    <Compile Include="Repositories.cs" />
+    <Compile Include="SellerDto.cs" />
     <Compile Include="SellerService.cs" />
+    <Compile Include="ServiceForService.cs" />
+    <Compile Include="WindowDto.cs" />
     <Compile Include="WindowsServices.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
