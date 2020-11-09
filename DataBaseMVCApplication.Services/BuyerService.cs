@@ -17,19 +17,27 @@ namespace DataBaseMVCApplication.Services
             repositories = new Repositories();
         }
 
-        public void AddBuyer(Buyer buyer)
+        public void AddBuyer(BuyerDto buyerDto)
         {
-            repositories.buyerRepository.Create(buyer);
+            repositories.buyerRepository.Create(Convert(buyerDto,false));
         }
 
-        public void EditBuyer(Buyer buyer)
+        public void EditBuyer(BuyerDto buyerDto)
         {
-            repositories.buyerRepository.Update(buyer);
+            repositories.buyerRepository.Update(Convert(buyerDto,true));
         }
 
         public void DeleteBuyer(long buyerId)
         {
             repositories.buyerRepository.Delete(buyerId);
+        }
+
+        private Buyer Convert(BuyerDto buyerDto,bool isUpdate)
+        {
+            Buyer buyer = new Buyer() { FIO = buyerDto.FIO, IsLegalEntity = buyerDto.IsLegalEntity, Phone = buyerDto.Phone };
+            if (isUpdate)
+                buyer.Id = buyerDto.Id;
+            return buyer;
         }
     }
 }

@@ -25,9 +25,9 @@ namespace DataBaseMVCApplication.Services
             repositories.serviceRepository.Update(service);
         }
 
-        public void DeleteService(Service service)
+        public void DeleteService(long serviceId)
         {
-            repositories.serviceRepository.Delete(service);
+            repositories.serviceRepository.Delete(serviceId);
         }
     }
 }

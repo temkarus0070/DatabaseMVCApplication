@@ -6,11 +6,12 @@ using System.Threading.Tasks;
 
 namespace DataBaseMVCApplication.Services
 {
-    public class BuyerDto
+    public class OrderPositionDto
     {
         public long Id { get; set; }
-        public string FIO { get; set; }
-        public string Phone { get; set; }
-        public bool IsLegalEntity { get; set; }
+        public long OrderId { get; set; }
+        public long WindowId { get; set; }
+        public double Length { get; set; }
+        public double Width { get; set; }
     }
 }

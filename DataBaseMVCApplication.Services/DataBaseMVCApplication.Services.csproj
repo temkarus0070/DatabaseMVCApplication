@@ -44,6 +44,8 @@
     <Compile Include="BuyerDto.cs" />
     <Compile Include="BuyerService.cs" />
     <Compile Include="OrderDto.cs" />
+    <Compile Include="OrderPositionDto.cs" />
+    <Compile Include="OrderPositionService.cs" />
     <Compile Include="OrderService.cs" />
     <Compile Include="Repositories.cs" />
     <Compile Include="SellerDto.cs" />
