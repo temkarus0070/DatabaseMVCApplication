@@ -30,7 +30,7 @@ namespace DataBaseMVCApplication.Services
 
         public void DeleteWindow(long windowId)
         {
-            repositories.windowRepository.Delete(windowId));
+            repositories.windowRepository.Delete(windowId);
         }
 
         public void EditWindow(WindowDto window)

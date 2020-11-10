@@ -10,27 +10,25 @@ namespace DataBaseMVCApplication.Services
 {
    public class SellerService
     {
-        
-        private WindowsDatabaseContext context;
+        private Repositories repositories;
         public SellerService()
         {
-            context = new WindowsDatabaseContext();
-            this.sellerRepository = new BaseRepository<Seller>(context);
+            repositories = new Repositories();
         }
 
         public void AddSeller(SellerDto sellerDto)
         {
-            sellerRepository.Create(Convert(sellerDto));
+            repositories.sellerRepository.Create(Convert(sellerDto));
         }
 
         public void DeleteSeller(SellerDto sellerDto)
         {
-            sellerRepository.Delete(Convert(sellerDto));
+            repositories.sellerRepository.Delete(Convert(sellerDto));
         }
 
         public void UpdateSeller(SellerDto sellerDto)
         {
-            sellerRepository.Update(Convert(sellerDto));
+            repositories.sellerRepository.Update(Convert(sellerDto));
         }
 
         private Seller Convert(SellerDto sellerDto)

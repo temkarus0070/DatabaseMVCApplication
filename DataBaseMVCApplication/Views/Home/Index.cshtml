@@ -1,6 +1,17 @@
-﻿@{
+﻿@model List<DataBaseMVCApplication.ViewModels.WindowViewModel>
+@{
     ViewBag.Title = "Home Page";
 }
+
+@foreach (var window in Model)
+{
+    <div>@window.Image</div>
+    <div>Наличие : @window.Having</div>
+    <div>Производитель :@window.ManufactorName</div>
+    <div>Цена: @window.Price</div>
+}
+
+@Html.ActionLink("Добавить окно","AddWindow","Window",null,null)
 
 <div class="jumbotron">
     <h1>ASP.NET</h1>
