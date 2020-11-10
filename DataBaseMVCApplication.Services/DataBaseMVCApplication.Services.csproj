@@ -43,6 +43,8 @@
   <ItemGroup>
     <Compile Include="BuyerDto.cs" />
     <Compile Include="BuyerService.cs" />
+    <Compile Include="ManufactorDto.cs" />
+    <Compile Include="ManufactorService.cs" />
     <Compile Include="OrderDto.cs" />
     <Compile Include="OrderPositionDto.cs" />
     <Compile Include="OrderPositionService.cs" />
