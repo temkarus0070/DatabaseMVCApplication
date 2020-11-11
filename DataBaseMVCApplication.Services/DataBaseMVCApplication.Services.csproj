@@ -53,6 +53,7 @@
     <Compile Include="SellerDto.cs" />
     <Compile Include="SellerService.cs" />
     <Compile Include="ServiceForService.cs" />
+    <Compile Include="Services.cs" />
     <Compile Include="WindowDto.cs" />
     <Compile Include="WindowsServices.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

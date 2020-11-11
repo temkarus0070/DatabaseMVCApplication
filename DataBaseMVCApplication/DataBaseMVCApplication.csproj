@@ -176,6 +176,7 @@
     <Content Include="Views\Window\Add.cshtml" />
     <Content Include="Views\Shared\ManufactorLayout.cshtml" />
     <Content Include="Views\Manufactor\Index.cshtml" />
+    <Content Include="Views\Manufactor\Add.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
