@@ -17,22 +17,38 @@ namespace DataBaseMVCApplication.Services
             repositories = new Repositories();
         }
 
+        public IEnumerable<OrderDto> GetOrders()
+        {
+            return repositories.orderRepository.Get().Select(e => new OrderDto()
+            {
+                BuyerId = e.BuyerId,
+                DeliverDate = e.DeliverDate,
+                IsDeliver = e.IsDeliver,
+                IsSetup = e.IsSetup,
+                OrderDate = e.OrderDate,
+                Price = e.Price,
+                SellerId = e.SellerId,
+                SetupDate = e.SetupDate,
+                Id = e.Id
+            });
+        }
+
         public void AddOrder(OrderDto orderDto)
         {
-            repositories.orderRepository.Create(Convert(orderDto,false));
+            repositories.orderRepository.Create(Convert(orderDto, false));
         }
 
         public void EditOrder(OrderDto orderDto)
         {
-            repositories.orderRepository.Update(Convert(orderDto,true));
+            repositories.orderRepository.Update(Convert(orderDto, true));
         }
 
         public void DeleteOrder(OrderDto orderDto)
         {
-            repositories.orderRepository.Delete(Convert(orderDto,true));
+            repositories.orderRepository.Delete(Convert(orderDto, true));
         }
 
-        private Order Convert(OrderDto orderDto,bool isUpdate)
+        private Order Convert(OrderDto orderDto, bool isUpdate)
         {
             Order order = new Order()
             {

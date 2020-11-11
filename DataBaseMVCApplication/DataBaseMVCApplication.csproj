@@ -127,14 +127,17 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\BuyerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManufactorController.cs" />
+    <Compile Include="Controllers\SellerController.cs" />
     <Compile Include="Controllers\WindowController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\ManufactorViewModel.cs" />
+    <Compile Include="ViewModels\SellerViewModel.cs" />
     <Compile Include="ViewModels\WindowViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -177,10 +180,13 @@
     <Content Include="Views\Shared\ManufactorLayout.cshtml" />
     <Content Include="Views\Manufactor\Index.cshtml" />
     <Content Include="Views\Manufactor\Add.cshtml" />
+    <Content Include="Views\Seller\Index.cshtml" />
+    <Content Include="Views\Seller\Add.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
+    <Folder Include="Views\Buyer\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

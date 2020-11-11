@@ -1,0 +1,25 @@
+﻿@model List<DataBaseMVCApplication.ViewModels.SellerViewModel>
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    @Html.ActionLink("Добавить продавцов", "Add", "Seller", null, new { @class = "btn btn-default" })
+    <div>
+        @foreach (var e in Model)
+        {
+            <div>@e.FIO</div>
+            <div>@e.Email</div>
+            <div>@e.Phone</div>
+            <div>@e.PercentFromOrder</div>
+        }
+    </div>
+</body>
+</html>

@@ -8,12 +8,24 @@ using System.Threading.Tasks;
 
 namespace DataBaseMVCApplication.Services
 {
-   public class SellerService
+    public class SellerService
     {
         private Repositories repositories;
         public SellerService()
         {
             repositories = new Repositories();
+        }
+
+        public IEnumerable<SellerDto> GetSellers()
+        {
+            return repositories.sellerRepository.Get().Select(e => new SellerDto()
+            {
+                Email = e.Email,
+                FIO = e.FIO,
+                Id = e.Id,
+                PercentFromOrder = e.PercentFromOrder,
+                Phone = e.Phone
+            });
         }
 
         public void AddSeller(SellerDto sellerDto)
