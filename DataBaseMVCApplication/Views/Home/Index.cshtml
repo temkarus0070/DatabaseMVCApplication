@@ -11,7 +11,16 @@
     <div>Цена: @window.Price</div>
 }
 
-@Html.ActionLink("Добавить окно","Add","Window",null,null)
+@Html.ActionLink("Добавить окно","Add","Window",null,new { @class="btn btn-default"})
+
+
+
+@Html.ActionLink("Добавить продавцов","Add","Seller",null,new { @class="btn btn-default"})
+@Html.ActionLink("Просмотр производителей","Index","Manufactor",null,new { @class="btn btn-default"})
+@Html.ActionLink("Просмотр продавцов","Index","Seller",null,new { @class="btn btn-default"})
+@Html.ActionLink("Просмотр заказов","Index","Order",null,new { @class="btn btn-default"})
+
+
 
 <div class="jumbotron">
     <h1>ASP.NET</h1>

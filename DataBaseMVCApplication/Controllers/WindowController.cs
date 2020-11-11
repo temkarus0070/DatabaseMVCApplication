@@ -19,17 +19,18 @@ namespace DataBaseMVCApplication.Controllers
 
         public ActionResult Add()
         {
-            var manufactors = manufactorService.GetManufactors().Select(model=>new ManufactorViewModel()
+            var manufactors = manufactorService.GetManufactors().Select(model => new ManufactorViewModel()
             {
-                 Name=model.Name, Id=model.Id
+                Name = model.Name,
+                Id = model.Id
             }).ToList();
             return View((new WindowViewModel(), manufactors));
         }
 
         [HttpPost]
-        public ActionResult Add(string Manufactor,HttpPostedFileBase UploadImage,WindowViewModel window)
+        public ActionResult Add(string manufactorId, HttpPostedFileBase UploadImage, WindowViewModel window)
         {
             return View();
         }
-            }
+    }
 }
