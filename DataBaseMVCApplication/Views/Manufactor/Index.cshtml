@@ -9,7 +9,7 @@
     <div>
         @foreach (var manufactor in Model)
         {
-            @Html.ActionLink(manufactor.Id.ToString(), "Show", new { id = manufactor.Id })
+            @Html.ActionLink(manufactor.Id.ToString(), "Show", new { manufactorId = manufactor.Id })
             <div>@manufactor.Name</div>
             <div>@manufactor.Phone</div>
 

@@ -30,9 +30,9 @@ namespace DataBaseMVCApplication.Controllers
             return View();
         }
 
-        public ActionResult Show(long id)
+        public ActionResult Show(long manufactorId)
         {
-            var manufactor = services.manufactorService.GetManufactor(id);
+            var manufactor = services.manufactorService.GetManufactor(manufactorId);
             var manufactorVM = new ManufactorViewModel()
             {
                 Address = manufactor.Address,
@@ -55,6 +55,32 @@ namespace DataBaseMVCApplication.Controllers
             };
             services.manufactorService.AddManufactor(manufactorDto);
             return View();
+        }
+
+        public ActionResult Edit(long manufactorId)
+        {
+            var manufactor = services.manufactorService.GetManufactor(manufactorId);
+            return View(new ManufactorViewModel()
+            {
+                Id = manufactor.Id,
+                Address = manufactor.Address,
+                Email = manufactor.Email,
+                Name = manufactor.Name,
+                Phone = manufactor.Phone
+            });
+        }
+        [HttpPost]
+        public ActionResult Edit(ManufactorViewModel manufactorViewModel)
+        {
+            services.manufactorService.EditManufactor(new ManufactorDto()
+            {
+                Id = manufactorViewModel.Id,
+                Address = manufactorViewModel.Address,
+                Email = manufactorViewModel.Email,
+                Name = manufactorViewModel.Name,
+                Phone = manufactorViewModel.Phone
+            });
+            return View(manufactorViewModel);
         }
     }
 }

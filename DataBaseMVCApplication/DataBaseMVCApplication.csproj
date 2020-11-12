@@ -177,7 +177,6 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Window\Add.cshtml" />
-    <Content Include="Views\Shared\ManufactorLayout.cshtml" />
     <Content Include="Views\Manufactor\Index.cshtml" />
     <Content Include="Views\Manufactor\Add.cshtml" />
     <Content Include="Views\Seller\Index.cshtml" />
@@ -190,6 +189,8 @@
     <Content Include="Views\Buyer\Show.cshtml" />
     <Content Include="Views\Buyer\Edit.cshtml" />
     <Content Include="Views\Seller\Edit.cshtml" />
+    <Content Include="Views\Shared\ManufactorLayout.cshtml" />
+    <Content Include="Views\Manufactor\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
