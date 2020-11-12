@@ -35,28 +35,32 @@ namespace DataBaseMVCApplication.Services
 
         public void AddSeller(SellerDto sellerDto)
         {
-            repositories.sellerRepository.Create(Convert(sellerDto));
+            repositories.sellerRepository.Create(Convert(sellerDto,false));
         }
 
         public void DeleteSeller(SellerDto sellerDto)
         {
-            repositories.sellerRepository.Delete(Convert(sellerDto));
+            repositories.sellerRepository.Delete(Convert(sellerDto,true));
         }
 
         public void UpdateSeller(SellerDto sellerDto)
         {
-            repositories.sellerRepository.Update(Convert(sellerDto));
+            repositories.sellerRepository.Update(Convert(sellerDto,true));
         }
 
-        private Seller Convert(SellerDto sellerDto)
+        private Seller Convert(SellerDto sellerDto,bool isUpdate)
         {
-            return new Seller()
+            var seller = new Seller()
             {
                 Email = sellerDto.Email,
                 FIO = sellerDto.FIO,
                 PercentFromOrder = sellerDto.PercentFromOrder,
                 Phone = sellerDto.Phone
             };
+            if (isUpdate)
+                seller.Id = sellerDto.Id;
+            return seller;
+
         }
     }
 }

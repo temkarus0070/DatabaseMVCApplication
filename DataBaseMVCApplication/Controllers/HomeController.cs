@@ -41,10 +41,12 @@ namespace DataBaseMVCApplication.Controllers
                 Image = window.Image,
                 ManufactorId = window.ManufactorId,
                 Price = window.Price,
-                 ManufactorName=window.Manufactor.Name
+                ManufactorName = window.Manufactor.Name
             };
             return View(windowVM);
         }
+
+
 
     }
 }

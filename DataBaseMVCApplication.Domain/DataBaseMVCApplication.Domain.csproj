@@ -52,13 +52,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseEntity.cs" />
-    <Compile Include="Buyer.cs" />
-    <Compile Include="Manufactor.cs" />
-    <Compile Include="Order.cs" />
-    <Compile Include="OrderPosition.cs" />
-    <Compile Include="Seller.cs" />
-    <Compile Include="Service.cs" />
-    <Compile Include="Window.cs" />
+    <Compile Include="Models\Buyer.cs" />
+    <Compile Include="Models\Manufactor.cs" />
+    <Compile Include="Models\Order.cs" />
+    <Compile Include="Models\OrderPosition.cs" />
+    <Compile Include="Models\Seller.cs" />
+    <Compile Include="Models\Service.cs" />
+    <Compile Include="Models\Window.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

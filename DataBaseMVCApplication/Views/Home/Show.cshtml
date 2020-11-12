@@ -11,8 +11,11 @@
     <h4>WindowViewModel</h4>
     <hr />
     <div>
+        @if (Model.Image != null)
+        {
         @Html.Raw("<img style='width=500px; height:500px' src=\"data:image/jpeg;base64,"
-                                + Convert.ToBase64String(Model.Image) + "\" />")
+                                         + Convert.ToBase64String(Model.Image) + "\" />")
+        }
     </div>
     <dl class="dl-horizontal">
 
@@ -61,6 +64,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Edit", "Edit", new {controller="window", id = Model.Id }) |
     @Html.ActionLink("Back to List", "Index")
 </p>

@@ -11,15 +11,25 @@
     <title>Index</title>
 </head>
 <body>
-    @Html.ActionLink("Добавить продавцов", "Add", "Seller", null, new { @class = "btn btn-default" })
+    @Html.ActionLink("Добавить продавцов", "Add", "Seller", null, new { @class = "btn btn-primary" })
     <div>
-        @foreach (var e in Model)
-        {
-            <div>@e.FIO</div>
-            <div>@e.Email</div>
-            <div>@e.Phone</div>
-            <div>@e.PercentFromOrder</div>
-        }
+        <table class="table">
+            <tr>
+                <th>ФИО</th>
+                <th>Электронная почта</th>
+                <th>Телефон</th>
+                <th>Процент от заказа</th>
+            </tr>
+            <tr>
+                @foreach (var e in Model)
+                {
+                    <td>@Html.ActionLink(e.FIO,"Edit",new {sellerId = e.Id })</td>
+                    <td>@e.Email</td>
+                    <td>@e.Phone</td>
+                    <td>@e.PercentFromOrder</td>
+                }
+            </tr>
+        </table>
     </div>
 </body>
 </html>

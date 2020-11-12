@@ -32,7 +32,7 @@ namespace DataBaseMVCApplication.Controllers
         }
 
         [HttpPost]
-        public ActionResult Add(SellerViewModel sellerViewModel,string PercentFromOrder)
+        public ActionResult Add(SellerViewModel sellerViewModel, string PercentFromOrder)
         {
             var sellerDto = new SellerDto()
             {
@@ -43,6 +43,33 @@ namespace DataBaseMVCApplication.Controllers
             };
             services.sellerService.AddSeller(sellerDto);
             return View("Index");
+        }
+
+        public ActionResult Edit(long sellerId)
+        {
+            var seller = services.sellerService.GetSeller(sellerId);
+            return View(new SellerViewModel()
+            {
+                Id = seller.Id,
+                Email = seller.Email,
+                FIO = seller.FIO,
+                PercentFromOrder = seller.PercentFromOrder,
+                Phone = seller.Phone
+            });
+        }
+
+        [HttpPost]
+        public ActionResult Edit(SellerViewModel seller)
+        {
+            services.sellerService.UpdateSeller(new SellerDto()
+            {
+                Email = seller.Email,
+                FIO = seller.FIO,
+                Id = seller.Id,
+                PercentFromOrder = seller.PercentFromOrder,
+                Phone = seller.Phone
+            });
+            return View(seller);
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DataBaseMVCApplication.Domain;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DataBaseMVCApplication.Infractracure.Data
 {
-   public class BaseRepository<TEntity> where TEntity:class
+    public class BaseRepository<TEntity> where TEntity : BaseEntity
     {
         internal WindowsDatabaseContext context;
         internal DbSet<TEntity> dbSet;
@@ -43,7 +44,7 @@ namespace DataBaseMVCApplication.Infractracure.Data
 
         public virtual void Delete(TEntity entity)
         {
-            if(context.Entry(entity).State== EntityState.Detached)
+            if (context.Entry(entity).State == EntityState.Detached)
             {
                 dbSet.Attach(entity);
             }
@@ -53,8 +54,18 @@ namespace DataBaseMVCApplication.Infractracure.Data
 
         public virtual void Update(TEntity entity)
         {
-            dbSet.Attach(entity);
+
+            long id = ((BaseEntity)entity).Id;
+            var local = context.Set<TEntity>()
+                .Local
+                .FirstOrDefault(f => f.Id == entity.Id);
+            if (local != null)
+            {
+                context.Entry(local).State = EntityState.Detached;
+            }
             context.Entry(entity).State = EntityState.Modified;
+
+
             SaveChanges();
         }
 

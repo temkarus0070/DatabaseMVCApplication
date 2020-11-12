@@ -22,6 +22,11 @@ namespace DataBaseMVCApplication.Services
             repositories.buyerRepository.Create(Convert(buyerDto,false));
         }
 
+        public IEnumerable<Buyer> GetBuyers()
+        {
+            return repositories.buyerRepository.Get();
+        }
+
         public Buyer GetBuyer(long id)
         {
             return repositories.buyerRepository.GetById(id);
