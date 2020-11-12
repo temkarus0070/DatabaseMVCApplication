@@ -29,18 +29,22 @@ namespace DataBaseMVCApplication.Controllers
             return View(windowsViewModelList);
         }
 
-        public ActionResult About()
+        public ActionResult Show(long index)
         {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
+            var window = windowsServices.GetWindow(index);
+            var windowVM = new WindowViewModel()
+            {
+                Color = window.Color,
+                Description = window.Description,
+                Having = window.Having,
+                Id = window.Id,
+                Image = window.Image,
+                ManufactorId = window.ManufactorId,
+                Price = window.Price,
+                 ManufactorName=window.Manufactor.Name
+            };
+            return View(windowVM);
         }
 
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
-        }
     }
 }

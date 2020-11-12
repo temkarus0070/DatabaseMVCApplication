@@ -30,6 +30,19 @@ namespace DataBaseMVCApplication.Controllers
             return View();
         }
 
+        public ActionResult Show(long id)
+        {
+            var manufactor = services.manufactorService.GetManufactor(id);
+            var manufactorVM = new ManufactorViewModel()
+            {
+                Address = manufactor.Address,
+                Email = manufactor.Email,
+                Id = manufactor.Id,
+                Name = manufactor.Name,
+                Phone = manufactor.Phone
+            };
+            return View(manufactorVM);
+        }
         [HttpPost]
         public ActionResult Add(ManufactorViewModel manufactor)
         {

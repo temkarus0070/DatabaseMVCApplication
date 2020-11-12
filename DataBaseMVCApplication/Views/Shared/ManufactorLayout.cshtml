@@ -1,6 +1,6 @@
 ﻿
 @{
-    Layout = null;
+     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <!DOCTYPE html>
@@ -14,7 +14,7 @@
 </head>
 <body>
     <div>
-        @Html.ActionLink("Добавить производителя", "Add", "Manufactor", null, new { @class = "btn btn-default" })
+        @Html.ActionLink("Добавить производителя", "Add", "Manufactor", null, new { @class = "btn btn-primary" })
         @RenderBody()
     </div>
 </body>

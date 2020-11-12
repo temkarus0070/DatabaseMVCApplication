@@ -1,15 +1,20 @@
 ﻿@model List<DataBaseMVCApplication.ViewModels.ManufactorViewModel>
 @{
     ViewBag.Title = "Index";
+
     Layout = "~/Views/Shared/ManufactorLayout.cshtml";
-}
-
-@foreach (var manufactor in Model)
-{
-    <div>@manufactor.Name</div>
-    <div>@manufactor.Phone</div>
 
 }
+
+    <div>
+        @foreach (var manufactor in Model)
+        {
+            @Html.ActionLink(manufactor.Id.ToString(), "Show", new { id = manufactor.Id })
+            <div>@manufactor.Name</div>
+            <div>@manufactor.Phone</div>
+
+        }
+    </div>
 
 <h2>Index</h2>
 

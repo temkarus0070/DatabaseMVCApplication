@@ -41,21 +41,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BuyerDto.cs" />
-    <Compile Include="BuyerService.cs" />
-    <Compile Include="ManufactorDto.cs" />
-    <Compile Include="ManufactorService.cs" />
-    <Compile Include="OrderDto.cs" />
-    <Compile Include="OrderPositionDto.cs" />
-    <Compile Include="OrderPositionService.cs" />
-    <Compile Include="OrderService.cs" />
+    <Compile Include="Dto\BuyerDto.cs" />
+    <Compile Include="Services\BuyerService.cs" />
+    <Compile Include="Dto\ManufactorDto.cs" />
+    <Compile Include="Services\ManufactorService.cs" />
+    <Compile Include="Dto\OrderDto.cs" />
+    <Compile Include="Dto\OrderPositionDto.cs" />
+    <Compile Include="Services\OrderPositionService.cs" />
+    <Compile Include="Services\OrderService.cs" />
     <Compile Include="Repositories.cs" />
-    <Compile Include="SellerDto.cs" />
-    <Compile Include="SellerService.cs" />
-    <Compile Include="ServiceForService.cs" />
+    <Compile Include="Dto\SellerDto.cs" />
+    <Compile Include="Services\SellerService.cs" />
+    <Compile Include="Services\ServiceForService.cs" />
     <Compile Include="Services.cs" />
-    <Compile Include="WindowDto.cs" />
-    <Compile Include="WindowsServices.cs" />
+    <Compile Include="Dto\WindowDto.cs" />
+    <Compile Include="Services\WindowsServices.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
