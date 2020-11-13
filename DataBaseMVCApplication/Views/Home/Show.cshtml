@@ -5,11 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Show</h2>
-
 <div>
-    <h4>WindowViewModel</h4>
-    <hr />
     <div>
         @if (Model.Image != null)
         {
@@ -22,7 +18,7 @@
 
 
         <dt>
-            @Html.DisplayNameFor(model => model.ManufactorName)
+            @Html.DisplayNameFor(model=>model.ManufactorName)
         </dt>
 
         <dd>
@@ -30,7 +26,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Price)
+            @Html.DisplayNameFor(model=>model.Price)
         </dt>
 
         <dd>

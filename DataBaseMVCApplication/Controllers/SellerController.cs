@@ -32,7 +32,7 @@ namespace DataBaseMVCApplication.Controllers
         }
 
         [HttpPost]
-        public ActionResult Add(SellerViewModel sellerViewModel, string PercentFromOrder)
+        public RedirectToRouteResult Add(SellerViewModel sellerViewModel, string PercentFromOrder)
         {
             var sellerDto = new SellerDto()
             {
@@ -42,7 +42,7 @@ namespace DataBaseMVCApplication.Controllers
                 Phone = sellerViewModel.Phone
             };
             services.sellerService.AddSeller(sellerDto);
-            return View("Index");
+            return RedirectToRoute(new { controller = "Seller", action = "index" });
         }
 
         public ActionResult Edit(long sellerId)

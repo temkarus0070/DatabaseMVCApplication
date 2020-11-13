@@ -31,7 +31,7 @@ namespace DataBaseMVCApplication.Controllers
         }
 
         [HttpPost]
-        public ActionResult Add(HttpPostedFileBase UploadImage, WindowViewModel window)
+        public RedirectToRouteResult Add(HttpPostedFileBase UploadImage, WindowViewModel window)
         {
             byte[] imageData = null;
             using (var binaryReader = new BinaryReader(UploadImage.InputStream))
@@ -48,7 +48,7 @@ namespace DataBaseMVCApplication.Controllers
                 Price = window.Price
             };
             services.windowsServices.AddWindow(windowDto);
-            return View();
+            return RedirectToRoute(new { controller="Home",action="Index"});
         }
 
         public ActionResult Edit(long id)

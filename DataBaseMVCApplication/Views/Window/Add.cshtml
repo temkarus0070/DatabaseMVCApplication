@@ -5,25 +5,27 @@
     ViewBag.Title = "Add";
 }
 
-<h2>Add</h2>
 
 
 
+<h4>Добавить окно</h4>
+@for (int i = 0; i < 10; i++)
+{
+    <br />
+}
 
 
-    @using (Html.BeginForm("Add","Window",FormMethod.Post, new { enctype="multipart/form-data"}))
-{    
-@Html.AntiForgeryToken()
+@using (Html.BeginForm("Add", "Window", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
     <div class="form-horizontal">
-        <h4>WindowViewModel</h4>
-        <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
             @Html.Label("Производитель", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("Manufactor",
                Model.Item2.Select(m => new SelectListItem() { Value = m.Id.ToString(), Text = m.Name })
-               , new { @class = "form-control",@Name="manufactorId" })
+               , new { @class = "form-control", @Name = "manufactorId" })
 
             </div>
         </div>
@@ -39,7 +41,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Item1.Price, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model=> model.Item1.Price,new { htmlAttributes = new { @class = "form-control",@Name="Price" } })
+                @Html.EditorFor(model => model.Item1.Price, new { htmlAttributes = new { @class = "form-control", @Name = "Price" } })
                 @Html.ValidationMessageFor(model => model.Item1.Price, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -47,7 +49,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Item1.Color, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Item1.Color, new { htmlAttributes = new { @class = "form-control",@Name="Color" } })
+                @Html.EditorFor(model => model.Item1.Color, new { htmlAttributes = new { @class = "form-control", @Name = "Color" } })
                 @Html.ValidationMessageFor(model => model.Item1.Color, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -56,7 +58,7 @@
             @Html.LabelFor(model => model.Item1.Having, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 <div class="checkbox">
-                    @Html.EditorFor(model => model.Item1.Having,new {htmlAttributes=new { @Name = "Having" } } )
+                    @Html.EditorFor(model => model.Item1.Having, new { htmlAttributes = new { @Name = "Having" } })
                     @Html.ValidationMessageFor(model => model.Item1.Having, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -65,21 +67,21 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Item1.Description, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Item1.Description, new { htmlAttributes = new { @class = "form-control",@Name="Description" } })
+                @Html.EditorFor(model => model.Item1.Description, new { htmlAttributes = new { @class = "form-control", @Name = "Description" } })
                 @Html.ValidationMessageFor(model => model.Item1.Description, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Добавить" class="btn btn-default" />
             </div>
         </div>
     </div>
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Список окон", "Index")
 </div>
 
 @section Scripts {

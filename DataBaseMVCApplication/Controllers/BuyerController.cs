@@ -29,7 +29,7 @@ namespace DataBaseMVCApplication.Controllers
         }
 
         [HttpPost]
-        public ActionResult Add(BuyerViewModel buyerViewModel)
+        public RedirectToRouteResult Add(BuyerViewModel buyerViewModel)
         {
             services.buyerService.AddBuyer(new Services.BuyerDto()
             {
@@ -37,7 +37,7 @@ namespace DataBaseMVCApplication.Controllers
                 IsLegalEntity = buyerViewModel.IsLegalEntity,
                 Phone = buyerViewModel.Phone
             });
-            return View();
+            return RedirectToRoute(new { controller = "Buyer", action = "Index" });
         }
 
         public ActionResult Show(long buyerId)
