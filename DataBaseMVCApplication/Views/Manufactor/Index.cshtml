@@ -6,13 +6,15 @@
 
 }
 
-    <div class="row">
+    <div class="row row-cols-1 row-cols-md-3">
         @foreach (var manufactor in Model)
         {
         <div class="col-md-2">
-            @Html.ActionLink(manufactor.Id.ToString(), "Show", new { manufactorId = manufactor.Id })
-            <div>Название производителя: @manufactor.Name</div>
-            <div>Телефон: @manufactor.Phone</div>
+            <div class="card">
+                @Html.ActionLink(manufactor.Id.ToString(), "Show", new { manufactorId = manufactor.Id })
+                <div>Название производителя: @manufactor.Name</div>
+                <div>Телефон: @manufactor.Phone</div>
+            </div>
         </div>
         }
     </div>
