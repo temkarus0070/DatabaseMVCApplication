@@ -7,15 +7,28 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
-        <style>
-            div {
-                font-size: 16px;
-            }
-        </style>
+    <script>
+        function submitform() {
+            $('form').submit();
+        }
+    </script>
+
+    <style>
+        body, html {
+  height: 100%;
+}
+
+        .table {
+            width:auto;
+        }
+        div {
+            font-size: 16px;
+        }
+    </style>
 
 </head>
-<body>
-    <div class="navbar navbar-left">
+<body style="height:100%">
+    <div  style="float:left; height:100%">
         <ul class="nav flex-column">
             <li class="nav-item">
                 <a class="nav-link" href="../../Seller">Продавцы</a>
