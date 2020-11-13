@@ -23,7 +23,7 @@
             <tr>
                 @foreach (var e in Model)
                 {
-                    <td>@Html.ActionLink(e.FIO,"Edit",new {sellerId = e.Id })</td>
+                    <td>@Html.ActionLink(e.FIO,"Show",new {sellerId = e.Id })</td>
                     <td>@e.Email</td>
                     <td>@e.Phone</td>
                     <td>@e.PercentFromOrder</td>

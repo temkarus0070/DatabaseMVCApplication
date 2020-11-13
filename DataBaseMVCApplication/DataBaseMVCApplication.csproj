@@ -191,6 +191,7 @@
     <Content Include="Views\Seller\Edit.cshtml" />
     <Content Include="Views\Shared\ManufactorLayout.cshtml" />
     <Content Include="Views\Manufactor\Edit.cshtml" />
+    <Content Include="Views\Seller\Show.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

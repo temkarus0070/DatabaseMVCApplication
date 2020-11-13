@@ -31,6 +31,20 @@ namespace DataBaseMVCApplication.Controllers
             return View();
         }
 
+        public ActionResult Show(long sellerId)
+        {
+            var seller = services.sellerService.GetSeller(sellerId);
+
+            return View(new SellerViewModel()
+            {
+                Id = sellerId,
+                Email = seller.Email,
+                FIO = seller.FIO,
+                PercentFromOrder = seller.PercentFromOrder,
+                Phone = seller.Phone
+            });
+        }
+
         [HttpPost]
         public RedirectToRouteResult Add(SellerViewModel sellerViewModel, string PercentFromOrder)
         {
