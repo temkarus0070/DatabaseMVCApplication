@@ -1,0 +1,169 @@
+﻿@model (DataBaseMVCApplication.ViewModels.OrderViewModel,HashSet<DataBaseMVCApplication.ViewModels.BuyerViewModel>,HashSet<DataBaseMVCApplication.ViewModels.SellerViewModel>,IEnumerable<DataBaseMVCApplication.ViewModels.WindowViewModel>)
+
+@{
+    ViewBag.Title = "Add";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+<div class="form-horizontal">
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <div class="form-group">
+        <label for="buyerId">Покупатель</label>
+        <input type="text" list="buyers" name="buyerId" id="buyerId" />
+        <datalist id="buyers">
+            @foreach (var e in Model.Item2)
+            {
+                <option value="@e.Id">@e.FIO</option>
+            }
+        </datalist>
+    </div>
+    <div class="form-group">
+        <label for="buyerId">Продавец</label>
+        <input type="text" list="sellers" name="sellerId" id="sellerId" />
+        <datalist id="sellers">
+            @foreach (var e in Model.Item3)
+            {
+                <option value="@e.Id">@e.FIO</option>
+            }
+        </datalist>
+    </div>
+
+
+    <datalist>
+        @foreach(var e in Model.Item4)
+        {
+
+        }
+        <option value=""></option>
+    </datalist>
+
+
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Item1.IsDeliver, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <div class="checkbox">
+                <input  type="checkbox" name="IsDeliver" id="IsDeliver" />
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Item1.IsSetup, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <div class="checkbox">
+                <input type="checkbox" name="IsSetup" id="IsSetup" />
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Item1.DeliverDate, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <input type="datetime" name="DeliverDate" id="DeliverDate"/>
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Item1.SetupDate, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <input type="datetime" name="SetupDate" id="SetupDate" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Item1.Price, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <input type="number" name="Price" id="Price" step="0.001" />
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        <button type="button" onclick="addPositionOrder()">Добавить позицию заказа</button>
+        <table id="orderPositions">
+            <tr>
+                <th>Окно</th>
+                <th>Длина</th>
+                <th>Ширина</th>
+                <th></th>
+            </tr>
+        </table>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Create" onclick="send()" class="btn btn-dark" id="addBtn" />
+        </div>
+    </div>
+</div>
+
+
+<script>
+
+         var i = 1;
+    function addPositionOrder() {
+        var table = $("#orderPositions");
+        table.append('<tr id='+'"'+i+'"' + '> <td> <input type="text" /> </td> <td> <input type="text" /> </td> <td>  <input type="text" /></td> <td> <button class="btn" type="button" onclick="deleteRow('+i+');"' + ' >Удалить  </button> </td> </tr>');
+        i++;
+        }
+
+   
+    function deleteRow(rowId) {
+        $('#' + rowId).remove();
+    }
+
+    function send() {
+               var orderPositions = new Array();
+        $("#orderPositions TBODY TR").each(function () {
+                var row = $(this);
+            var orderPosition = {};
+            if (row.find("TD").eq(0).children("input")[0] != null) {
+                orderPosition.WindowId = row.find("TD").eq(0).children("input")[0].value;
+                orderPosition.Length = row.find("TD").eq(1).children("input")[0].value;
+                orderPosition.Width = row.find("TD").eq(2).children("input")[0].value;
+                orderPositions.push(orderPosition);
+            }
+            }
+        );
+
+
+        var order = {};
+        order.BuyerId = $("#buyerId")[0].value;
+        order.SellerId = $("#sellerId")[0].value;
+        order.IsDeliver = $("#IsDeliver")[0].value;
+        order.isSetup = $("#IsSetup")[0].value;
+        order.DeliverDate = $("#DeliverDate")[0].value;
+        order.SetupDate = $("#SetupDate")[0].value;
+        order.Price = $("#Price")[0].value;
+        var str = JSON.stringify(orderPositions + order);
+
+        $.ajax({
+            type:"POST",
+            url: "/Order/Add",
+            data: JSON.stringify(orderPositions) + JSON.stringify(order),
+            contentType: "application/json; charset=utf-8",
+            dataType:"json"
+        });
+    }
+
+
+
+</script>
+
+}
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -17,5 +17,17 @@ namespace DataBaseMVCApplication.ViewModels
         [DisplayName("Юридическое лицо")]
         public bool IsLegalEntity { get; set; }
         public List<OrderViewModel> Orders { get; set; }
+
+
+        public override bool Equals(object obj)
+        {
+            return FIO.Equals(((BuyerViewModel)obj).FIO);
+        }
+
+        public override int GetHashCode()
+        {
+            return FIO.GetHashCode();
+        }
+
     }
 }

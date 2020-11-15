@@ -82,6 +82,7 @@ namespace DataBaseMVCApplication.Controllers
                 Id = seller.Id,
                 PercentFromOrder = seller.PercentFromOrder,
                 Phone = seller.Phone
+               
             });
             return View(seller);
         }

@@ -17,5 +17,15 @@ namespace DataBaseMVCApplication.ViewModels
         public string Email { get; set; }
         [DisplayName("Процент от заказа")]
         public double PercentFromOrder { get; set; }
+
+        public override bool Equals(object obj)
+        {
+            return FIO.Equals(((SellerViewModel)obj).FIO);
+        }
+
+        public override int GetHashCode()
+        {
+            return FIO.GetHashCode();
+        }
     }
 }

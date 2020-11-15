@@ -5,11 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h4>Редактировать продавца</h4>
-@for (int i = 0; i < 10; i++)
-{
-    <br />
-}
+
 
 
 @using (Html.BeginForm())
@@ -53,15 +49,13 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Редактировать" class="btn btn-default" />
+                <input type="submit" value="Редактировать" class="btn btn-dark" />
             </div>
         </div>
     </div>
 }
 
-<div>
-    @Html.ActionLink("Список продавцов", "Index")
-</div>
+
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
