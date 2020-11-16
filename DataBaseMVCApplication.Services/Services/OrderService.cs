@@ -38,9 +38,12 @@ namespace DataBaseMVCApplication.Services
             return repositories.orderRepository.GetById(id);
         }
 
-        public void AddOrder(OrderDto orderDto)
+        public long AddOrder(OrderDto orderDto)
         {
-            repositories.orderRepository.Create(Convert(orderDto, false));
+            var order = Convert(orderDto, false);
+            repositories.orderRepository.Create(order);
+            return order.Id;
+
         }
 
         public void EditOrder(OrderDto orderDto)

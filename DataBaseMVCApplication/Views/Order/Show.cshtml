@@ -1,0 +1,104 @@
+﻿@model (DataBaseMVCApplication.ViewModels.OrderViewModel,IEnumerable<DataBaseMVCApplication.ViewModels.OrderPositionViewModel>)
+
+@{
+    ViewBag.Title = "Show";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Show</h2>
+
+<div>
+    <h4>OrderViewModel</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Item1.SellerId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Item1.SellerId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Item1.BuyerId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Item1.BuyerId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Item1.IsDeliver)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Item1.IsDeliver)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Item1.IsSetup)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Item1.IsSetup)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Item1.OrderDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Item1.OrderDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Item1.DeliverDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Item1.DeliverDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Item1.SetupDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Item1.SetupDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Item1.Price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Item1.Price)
+        </dd>
+
+    </dl>
+</div>
+<div>
+    @foreach(var e in Model.Item2)
+    {
+    <div>
+        @if (e.Window.Image != null)
+        {
+            @Html.Raw("<img width=50% src=\"data:image/jpeg;base64,"
+                                             + Convert.ToBase64String(e.Window.Image) + "\" />")
+        }
+    </div>
+    <div>
+        <p>@e.Window.ManufactorName</p>
+        <p>@e.Window.Description</p>
+        <p>@e.Window.Color</p>
+        <p>@e.Window.Having</p>
+    </div>
+    <div>
+        <p>@e.Width</p>
+        <p>@e.Length</p>
+    </div>
+    }
+</div>
+<p>
+    @Html.ActionLink("Редактировать", "Edit", new { orderId = Model.Item1.Id }) |
+</p>

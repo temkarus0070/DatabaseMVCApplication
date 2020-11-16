@@ -22,8 +22,8 @@ namespace DataBaseMVCApplication.Domain
         public bool IsDeliver { get; set; }
         public bool IsSetup { get; set; }
         public DateTime OrderDate { get; set; }
-        public DateTime DeliverDate { get; set; }
-        public DateTime SetupDate { get; set; }
+        public DateTime? DeliverDate { get; set; }
+        public DateTime? SetupDate { get; set; }
         public double Price { get; set; }
         public virtual ICollection<OrderPosition> OrderPositions { get; set; }
     }

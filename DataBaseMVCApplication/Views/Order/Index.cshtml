@@ -12,6 +12,9 @@
 <table class="table">
     <tr>
         <th>
+            @Html.DisplayNameFor(model => model.Id)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.SellerId)
         </th>
         <th>
@@ -40,6 +43,9 @@
 
 @foreach (var item in Model) {
     <tr>
+        <td>
+            @Html.ActionLink(item.Id.ToString(),"Show",new {orderId=item.Id })
+        </td>
         <td>
             @Html.DisplayFor(modelItem => item.SellerId)
         </td>

@@ -1,0 +1,178 @@
+﻿@model (DataBaseMVCApplication.ViewModels.OrderViewModel, HashSet<DataBaseMVCApplication.ViewModels.BuyerViewModel>, HashSet<DataBaseMVCApplication.ViewModels.SellerViewModel>, IEnumerable<DataBaseMVCApplication.ViewModels.WindowViewModel>)
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+@using (Html.BeginForm("Edit", "Order", FormMethod.Post, new { @onsubmit = "sendData();" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.Item1.Id, new { @id = "orderId" })
+     
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Item1.SellerId, htmlAttributes: new { @class = "control-label col-md-2" }).
+            <div class="col-md-10">
+                <input type="text" id="sellerId" list="sellers" value="@ViewBag.SellerName" />
+            </div>
+        </div>
+
+
+
+
+        <datalist id="sellers">
+            @foreach (var e in Model.Item3)
+            {
+                <option>@e.FIO</option>
+            }
+        </datalist>
+
+        <ul id="sellersList" hidden>
+            @foreach (var e in Model.Item3)
+            {
+                <li id="@e.Id">@e.FIO</li>
+            }
+        </ul>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Item1.BuyerId, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input type="text" id="buyerId" list="buyers" value="@ViewBag.BuyerName" />
+            </div>
+        </div>
+
+        <datalist id="buyers">
+            @foreach (var e in Model.Item2)
+            {
+                <option>@e.FIO</option>
+            }
+        </datalist>
+
+        <ul id="buyersList" hidden>
+            @foreach (var e in Model.Item2)
+            {
+                <li id="@e.Id">@e.FIO</li>
+            }
+        </ul>
+
+
+
+
+
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Item1.IsDeliver, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="checkbox">
+                    <input type="checkbox" id="IsDeliver" />
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Item1.IsSetup, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="checkbox">
+                    <input type="checkbox" id="IsSetup" />
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Item1.OrderDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input type="datetime-local" value="@String.Format("{0}-{1}-{2}T{3}:{4}",Model.Item1.OrderDate.Year,Model.Item1.OrderDate.Month,Model.Item1.OrderDate.Day,Model.Item1.OrderDate.Hour,Model.Item1.OrderDate.Minute)" />
+                @Html.ValidationMessageFor(model => model.Item1.OrderDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Item1.DeliverDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input type="datetime-local" value="@if (Model.Item1.DeliverDate != null) {@String.Format("{0}-{1}-{2}T0{3}:0{4}",Model.Item1.DeliverDate.Value.Year,Model.Item1.DeliverDate.Value.Month,Model.Item1.DeliverDate.Value.Day,Model.Item1.DeliverDate.Value.Hour,Model.Item1.DeliverDate.Value.Minute)}" id="DeliverDate" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Item1.SetupDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input type="datetime-local" id="SetupDate" value="@if (Model.Item1.SetupDate != null) {@String.Format("{0}-{1}-{2}T0{3}:0{4}",Model.Item1.SetupDate.Value.Year,Model.Item1.SetupDate.Value.Month,Model.Item1.SetupDate.Value.Day,Model.Item1.SetupDate.Value.Hour,Model.Item1.SetupDate.Value.Minute)}" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Item1.Price, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input type="number" step="0.001" id="Price" value="@Model.Item1.Price.ToString().Replace(",",".")" />
+            </div>
+        </div>
+
+        <div style="margin-bottom:40px">
+            <button type="button" onclick="addPositionOrder()">Добавить позицию заказа</button>
+
+            <datalist id="windows">
+                @foreach (var e in Model.Item4)
+                {
+                    <option value="@String.Format("{0} производитель {1} цвет {2} наличие:{3} цена:{4}",e.Description,e.ManufactorName,e.Color,e.Having?"В наличии":"Нет в наличии",e.Price)"></option>
+                }
+
+            </datalist>
+
+            <ul id="windowsList" hidden>
+                @foreach (var e in Model.Item4)
+                {
+                    <li id="@e.Id">@String.Format("{0} производитель {1} цвет {2} наличие:{3} цена:{4}", e.Description, e.ManufactorName, e.Color, e.Having ? "В наличии" : "Нет в наличии", e.Price)</li>
+                }
+            </ul>
+
+
+            <table id="orderPositions" class="table">
+                <tr>
+                    <th>Окно</th>
+                    <th>Длина</th>
+                    <th>Ширина</th>
+                </tr>
+                @foreach (var e in Model.Item1.OrderPositions)
+                {
+                    <tr>
+                        <td> <input list="windows" type="text" value="@String.Format("{0} производитель {1} цвет {2} наличие:{3} цена:{4}", e.Window.Description, e.Window.ManufactorName, e.Window.Color, e.Window.Having ? "В наличии" : "Нет в наличии", e.Window.Price)" /></td>
+                        <td> <input type="number" value="@e.Length" /></td>
+                        <td> <input type="number" value="@e.Width" /></td>
+                        <td> <input type="button" value="Удалить" onclick="deleteOrderPosition(@e.Id)" /></td>
+                        <input type="hidden" value="@e.Id" />
+                    </tr>
+
+
+                }
+            </table>
+            <input type="button" value="Обновить позиции заказа" onclick="updateOrderPositions()" />
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="button" value="Редактировать" class="btn btn-dark" onclick="sendData()" />
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+
+<script src="~/Scripts/ScriptsForViews/editOrder.js">
+
+</script>
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+

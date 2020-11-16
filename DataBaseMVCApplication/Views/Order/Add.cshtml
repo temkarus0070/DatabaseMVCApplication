@@ -20,29 +20,53 @@
         <datalist id="buyers">
             @foreach (var e in Model.Item2)
             {
-                <option value="@e.Id">@e.FIO</option>
+                <option>@e.FIO</option>
             }
         </datalist>
+
+        <ul id="buyersList" hidden>
+            @foreach(var e in Model.Item2)
+            {
+                <li id="@e.Id">@e.FIO</li>
+            }
+        </ul>
+        @Html.RouteLink("Добавить покупателя", new { controller = "Buyer", action = "add" },new {@class="btn btn-primary" })
     </div>
     <div class="form-group">
-        <label for="buyerId">Продавец</label>
+        <label for="sellerId">Продавец</label>
         <input type="text" list="sellers" name="sellerId" id="sellerId" />
         <datalist id="sellers">
             @foreach (var e in Model.Item3)
             {
-                <option value="@e.Id">@e.FIO</option>
+                <option>@e.FIO</option>
             }
         </datalist>
+
+        <ul id="sellersList" hidden>
+            @foreach (var e in Model.Item3)
+            {
+                <li id="@e.Id">@e.FIO</li>
+            }
+        </ul>
     </div>
 
 
-    <datalist>
-        @foreach(var e in Model.Item4)
+    <datalist id="windows">
+        @foreach (var e in Model.Item4)
         {
+            <option value="@String.Format("{0} производитель {1} цвет {2} наличие:{3} цена:{4}",e.Description,e.ManufactorName,e.Color,e.Having?"В наличии":"Нет в наличии",e.Price)">
 
+            </option>
         }
-        <option value=""></option>
+
     </datalist>
+
+    <ul id="windowsList" hidden>
+        @foreach (var e in Model.Item4)
+        {
+        <li id="@e.Id">@String.Format("{0} производитель {1} цвет {2} наличие:{3} цена:{4}", e.Description, e.ManufactorName, e.Color, e.Having ? "В наличии" : "Нет в наличии", e.Price)</li>
+        }
+    </ul>
 
 
 
@@ -102,61 +126,13 @@
 
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Create" onclick="send()" class="btn btn-dark" id="addBtn" />
+            <input type="button" value="Добавить" onclick="send()" class="btn btn-dark" id="addBtn" />
         </div>
     </div>
 </div>
 
 
-<script>
-
-         var i = 1;
-    function addPositionOrder() {
-        var table = $("#orderPositions");
-        table.append('<tr id='+'"'+i+'"' + '> <td> <input type="text" /> </td> <td> <input type="text" /> </td> <td>  <input type="text" /></td> <td> <button class="btn" type="button" onclick="deleteRow('+i+');"' + ' >Удалить  </button> </td> </tr>');
-        i++;
-        }
-
-   
-    function deleteRow(rowId) {
-        $('#' + rowId).remove();
-    }
-
-    function send() {
-               var orderPositions = new Array();
-        $("#orderPositions TBODY TR").each(function () {
-                var row = $(this);
-            var orderPosition = {};
-            if (row.find("TD").eq(0).children("input")[0] != null) {
-                orderPosition.WindowId = row.find("TD").eq(0).children("input")[0].value;
-                orderPosition.Length = row.find("TD").eq(1).children("input")[0].value;
-                orderPosition.Width = row.find("TD").eq(2).children("input")[0].value;
-                orderPositions.push(orderPosition);
-            }
-            }
-        );
-
-
-        var order = {};
-        order.BuyerId = $("#buyerId")[0].value;
-        order.SellerId = $("#sellerId")[0].value;
-        order.IsDeliver = $("#IsDeliver")[0].value;
-        order.isSetup = $("#IsSetup")[0].value;
-        order.DeliverDate = $("#DeliverDate")[0].value;
-        order.SetupDate = $("#SetupDate")[0].value;
-        order.Price = $("#Price")[0].value;
-        var str = JSON.stringify(orderPositions + order);
-
-        $.ajax({
-            type:"POST",
-            url: "/Order/Add",
-            data: JSON.stringify(orderPositions) + JSON.stringify(order),
-            contentType: "application/json; charset=utf-8",
-            dataType:"json"
-        });
-    }
-
-
+<script  src="~/Scripts/ScriptsForViews/addPositionOrder.js">
 
 </script>
 

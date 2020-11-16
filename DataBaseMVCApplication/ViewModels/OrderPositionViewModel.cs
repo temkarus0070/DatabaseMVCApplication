@@ -10,9 +10,9 @@ namespace DataBaseMVCApplication.ViewModels
     {
         public long Id { get; set; }
         public long OrderId { get; set; }
-        public Order Order { get; set; }
+        public OrderViewModel Order { get; set; }
         public long WindowId { get; set; }
-        public Window Window { get; set; }
+        public WindowViewModel Window { get; set; }
         public double Length { get; set; }
         public double Width { get; set; }
     }

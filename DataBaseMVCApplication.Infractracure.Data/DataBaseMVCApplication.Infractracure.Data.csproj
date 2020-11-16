@@ -60,6 +60,10 @@
     <Compile Include="Migrations\202011061336258_AddBaseEntity.designer.cs">
       <DependentUpon>202011061336258_AddBaseEntity.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202011160624203_ChangeTypeOrderDateAndSetupDate.cs" />
+    <Compile Include="Migrations\202011160624203_ChangeTypeOrderDateAndSetupDate.designer.cs">
+      <DependentUpon>202011160624203_ChangeTypeOrderDateAndSetupDate.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="WindowsDatabaseContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -80,6 +84,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202011061336258_AddBaseEntity.resx">
       <DependentUpon>202011061336258_AddBaseEntity.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011160624203_ChangeTypeOrderDateAndSetupDate.resx">
+      <DependentUpon>202011160624203_ChangeTypeOrderDateAndSetupDate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -9,6 +9,7 @@ namespace DataBaseMVCApplication.ViewModels
 {
     public class OrderViewModel
     {
+        [DisplayName("Номер заказа")]
         public long Id { get; set; }
         public long SellerId { get; set; }
         public long BuyerId { get; set; }
@@ -21,11 +22,11 @@ namespace DataBaseMVCApplication.ViewModels
         [DisplayName("Дата заказа")]
         public DateTime OrderDate { get; set; }
         [DisplayName("Дата доставки")]
-        public DateTime DeliverDate { get; set; }
+        public DateTime? DeliverDate { get; set; }
         [DisplayName("Дата установки")]
-        public DateTime SetupDate { get; set; }
+        public DateTime? SetupDate { get; set; }
         [DisplayName("Цена")]
         public double Price { get; set; }
-        public ICollection<OrderPosition> OrderPositions { get; set; }
+        public ICollection<OrderPositionViewModel> OrderPositions { get; set; }
     }
 }

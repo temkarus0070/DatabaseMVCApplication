@@ -27,6 +27,11 @@ namespace DataBaseMVCApplication.Services
             repositories.orderPositionRepository.Update(Convert(orderPositionDto,true));
         }
 
+        public IEnumerable<OrderPosition> GetOrderPositions(long orderId)
+        {
+            return repositories.orderPositionRepository.Get().Where(e=>e.OrderId == orderId);
+        }
+
         public void DeleteOrderPosition(long id)
         {
             repositories.orderPositionRepository.Delete(id);
