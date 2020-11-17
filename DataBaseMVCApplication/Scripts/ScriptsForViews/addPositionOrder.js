@@ -38,9 +38,11 @@ function changeWidth(input, id) {
 function CalculatePrice() {
     var sum = 0;
     for (var index = 1; index < numbersForPrice.length; index++) {
-        var p = numbersForPrice[index][0];
-        var s = numbersForPrice[index][1] * numbersForPrice[index][2];
-        sum += p * s;
+        if (numbersForPrice[index] != undefined) {
+            var p = numbersForPrice[index][0];
+            var s = numbersForPrice[index][1] * numbersForPrice[index][2];
+            sum += p * s;
+        }
         
     }
     $("#Price").val(sum);
@@ -63,13 +65,9 @@ function addPositionOrder() {
 
 
 function deleteRow(rowId) {
-    for (var index = 0; index < 2; index++) {
-        numbersForPrice[rowId][index] = 0;
-    }
-  
     $('#' + rowId).remove();
+    numbersForPrice[rowId] = undefined;
     CalculatePrice();
-    i--;
 }
 
 function send() {

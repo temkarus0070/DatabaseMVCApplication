@@ -44,7 +44,7 @@ namespace DataBaseMVCApplication.Controllers
             return View(manufactorVM);
         }
         [HttpPost]
-        public ActionResult Add(ManufactorViewModel manufactor)
+        public RedirectToRouteResult Add(ManufactorViewModel manufactor)
         {
             var manufactorDto = new ManufactorDto()
             {
@@ -54,7 +54,7 @@ namespace DataBaseMVCApplication.Controllers
                 Phone = manufactor.Phone
             };
             services.manufactorService.AddManufactor(manufactorDto);
-            return View();
+            return RedirectToRoute(new { controller = "Manufactor", action = "Index" });
         }
 
         public ActionResult Edit(long manufactorId)
@@ -81,6 +81,12 @@ namespace DataBaseMVCApplication.Controllers
                 Phone = manufactorViewModel.Phone
             });
             return View(manufactorViewModel);
+        }
+
+        public void Delete(string manufactorId)
+        {
+            long id = long.Parse(manufactorId);
+            services.manufactorService.DeleteManufactor(id);
         }
     }
 }

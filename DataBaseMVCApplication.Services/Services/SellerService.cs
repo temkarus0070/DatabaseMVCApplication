@@ -38,9 +38,9 @@ namespace DataBaseMVCApplication.Services
             repositories.sellerRepository.Create(Convert(sellerDto,false));
         }
 
-        public void DeleteSeller(SellerDto sellerDto)
+        public void DeleteSeller(long sellerId)
         {
-            repositories.sellerRepository.Delete(Convert(sellerDto,true));
+            repositories.sellerRepository.Delete(sellerId);
         }
 
         public void UpdateSeller(SellerDto sellerDto)

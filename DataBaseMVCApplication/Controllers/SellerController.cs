@@ -86,5 +86,11 @@ namespace DataBaseMVCApplication.Controllers
             });
             return View(seller);
         }
+
+        public void Delete(string sellerId)
+        {
+            long id = long.Parse(sellerId);
+            services.sellerService.DeleteSeller(id);
+        }
     }
 }

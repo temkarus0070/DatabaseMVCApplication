@@ -101,5 +101,11 @@ namespace DataBaseMVCApplication.Controllers
 
             return View(windowViewModel);
         }
+
+        public void Delete(string windowId)
+        {
+            long id = long.Parse(windowId);
+            services.windowsServices.DeleteWindow(id);
+        }
     }
 }

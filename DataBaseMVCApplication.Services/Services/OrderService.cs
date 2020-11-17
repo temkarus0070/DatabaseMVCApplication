@@ -51,9 +51,9 @@ namespace DataBaseMVCApplication.Services
             repositories.orderRepository.Update(Convert(orderDto, true));
         }
 
-        public void DeleteOrder(OrderDto orderDto)
+        public void DeleteOrder(long id)
         {
-            repositories.orderRepository.Delete(Convert(orderDto, true));
+            repositories.orderRepository.Delete(id);
         }
 
         private Order Convert(OrderDto orderDto, bool isUpdate)

@@ -6,17 +6,22 @@
 
 }
 
-    <div class="row row-cols-1 row-cols-md-3">
-        @foreach (var manufactor in Model)
-        {
-        <div class="col-md-2">
+<div class="row row-cols-1 row-cols-md-3">
+    @foreach (var manufactor in Model)
+    {
+        <div class="col-md-2" id="@manufactor.Id">
             <div class="card">
                 @Html.ActionLink(manufactor.Id.ToString(), "Show", new { manufactorId = manufactor.Id })
                 <div>Название производителя: @manufactor.Name</div>
                 <div>Телефон: @manufactor.Phone</div>
+                <button type="button" onclick="deleteManufactor(@manufactor.Id)" style="background-color: transparent;border:none;">
+                    <img  width="25px" height="25px" src="~/Images/delete.png" />
+                </button>
             </div>
         </div>
-        }
-    </div>
+    }
+</div>
 
+
+<script src="~/Scripts/ScriptsForViews/removeEntities.js"></script>
 

@@ -299,6 +299,12 @@ namespace DataBaseMVCApplication.Controllers
             });
         }
 
+        public void Delete(string orderId)
+        {
+            long id = long.Parse(orderId);
+            services.orderService.DeleteOrder(id);
+        }
+
 
     }
 }

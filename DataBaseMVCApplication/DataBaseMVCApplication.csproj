@@ -148,6 +148,7 @@
     <Compile Include="ViewModels\WindowViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Images\delete.png" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
     <Content Include="Content\bootstrap-reboot.css" />
@@ -197,6 +198,7 @@
     <Content Include="Scripts\popper.js" />
     <Content Include="Scripts\popper.min.js" />
     <Content Include="Scripts\ScriptsForViews\editOrder.js" />
+    <Content Include="Scripts\ScriptsForViews\removeEntities.js" />
     <Content Include="Scripts\src\index.js" />
     <Content Include="Scripts\src\methods\defaults.js" />
     <Content Include="Scripts\src\methods\destroy.js" />

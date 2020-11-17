@@ -4,7 +4,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="d-flex flex-row justify-content-between"  style="margin-bottom:40px">
+<div class="d-flex flex-row justify-content-between" style="margin-bottom:40px">
     @using (Html.BeginForm("Index", "Home"))
     {
         @Html.DropDownList("ManufactorId", Model.Item2.Select(e =>
@@ -24,7 +24,7 @@ return listItem;
 <div class="row row-cols-1 row-cols-md-3">
     @foreach (var window in Model.Item1)
     {
-        <div class="col mb-4">
+        <div class="col mb-4" id="@window.Id">
             <div class="card">
                 <div>
                     @Html.ActionLink(window.Id.ToString(), "Show", new { index = window.Id })
@@ -50,11 +50,23 @@ return listItem;
                     <div>Цвет : @window.Color</div>
                     <div>Описание: @window.Description</div>
                     <div>Цена: @window.Price</div>
+                    <div>
+                        <button type="button" onclick="deleteWindow(@window.Id)" style="background-color: transparent;border:none;">
+                            <img width="50px" height="50px" src="~/Images/delete.png" />
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
     }
 </div>
+
+<script src="~/Scripts/ScriptsForViews/removeEntities.js"></script>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
 
 
 

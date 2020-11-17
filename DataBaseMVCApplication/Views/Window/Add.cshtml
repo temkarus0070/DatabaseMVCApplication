@@ -7,14 +7,6 @@
 
 
 
-
-<h4>Добавить окно</h4>
-@for (int i = 0; i < 10; i++)
-{
-    <br />
-}
-
-
 @using (Html.BeginForm("Add", "Window", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
@@ -74,15 +66,13 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Добавить" class="btn btn-default" />
+                <input type="submit" value="Добавить" class="btn btn-primary" />
             </div>
         </div>
     </div>
 }
 
-<div>
-    @Html.ActionLink("Список окон", "Index")
-</div>
+
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

@@ -7,7 +7,7 @@
 
 
 <p>
-    @Html.ActionLink("Добавить заказ", "Add",null,new {@class="btn btn-primary" })
+    @Html.ActionLink("Добавить заказ", "Add", null, new { @class = "btn btn-primary" })
 </p>
 <table class="table">
     <tr>
@@ -41,36 +41,49 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.ActionLink(item.Id.ToString(),"Show",new {orderId=item.Id })
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Seller.FIO)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Buyer.FIO)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IsDeliver)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IsSetup)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.OrderDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DeliverDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.SetupDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Price)
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr id="@item.Id">
+            <td>
+                @Html.ActionLink(item.Id.ToString(), "Show", new { orderId = item.Id })
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Seller.FIO)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Buyer.FIO)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsDeliver)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsSetup)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OrderDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DeliverDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SetupDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                <button type="button" onclick="deleteOrder(@item.Id)" style="background-color: transparent;border:none;">
+                    <img width="25px" height="25px" src="~/Images/delete.png" />
+                </button>
+            </td>
+        </tr>
+    }
 
 </table>
+<script src="~/Scripts/ScriptsForViews/removeEntities.js"></script>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+
