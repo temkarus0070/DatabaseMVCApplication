@@ -5,26 +5,23 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Show</h2>
 
 <div>
-    <h4>OrderViewModel</h4>
-    <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Item1.SellerId)
+            @Html.DisplayName("Продавец")
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Item1.SellerId)
+            @Html.DisplayFor(model => model.Item1.Seller.FIO)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Item1.BuyerId)
+            @Html.DisplayName("Покупатель")
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Item1.BuyerId)
+            @Html.DisplayFor(model => model.Item1.Buyer.FIO)
         </dd>
 
         <dt>
@@ -78,27 +75,38 @@
     </dl>
 </div>
 <div>
-    @foreach(var e in Model.Item2)
-    {
-    <div>
-        @if (e.Window.Image != null)
+    <p>Позиции заказа</p>
+    <table class="table">
+        <tr>
+            <th>Окно</th>
+            <th>Длина</th>
+            <th>Ширина</th>
+        </tr>
+        @foreach (var e in Model.Item2)
         {
-            @Html.Raw("<img width=50% src=\"data:image/jpeg;base64,"
-                                             + Convert.ToBase64String(e.Window.Image) + "\" />")
+        <tr>
+            <td>
+                @if (e.Window.Image != null)
+                {
+                    @Html.Raw("<img width=25% src=\"data:image/jpeg;base64,"
+                                                     + Convert.ToBase64String(e.Window.Image) + "\" />")
+                }
+
+                <p>Производитель: @e.Window.ManufactorName</p>
+                <p>@e.Window.Description</p>
+                <p>Цвет: @e.Window.Color</p>
+                <p>Наличие: @(e.Window.Having?"В наличии":"Нет в наличии")</p>
+                <p>Цена: @e.Window.Price рублей</p>
+            </td>
+            <td>
+                <p>@e.Width</p>
+              
+            </td>
+            <td>  <p>@e.Length</p></td>
+        </tr>
         }
-    </div>
-    <div>
-        <p>@e.Window.ManufactorName</p>
-        <p>@e.Window.Description</p>
-        <p>@e.Window.Color</p>
-        <p>@e.Window.Having</p>
-    </div>
-    <div>
-        <p>@e.Width</p>
-        <p>@e.Length</p>
-    </div>
-    }
+    </table>
 </div>
 <p>
-    @Html.ActionLink("Редактировать", "Edit", new { orderId = Model.Item1.Id }) |
+    @Html.ActionLink("Редактировать", "Edit", new { orderId = Model.Item1.Id },new { @class="btn btn-primary" }) 
 </p>

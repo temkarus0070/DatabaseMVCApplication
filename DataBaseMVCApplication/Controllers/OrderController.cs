@@ -134,13 +134,28 @@ namespace DataBaseMVCApplication.Controllers
                 Price = order.Price,
                 SellerId = order.SellerId,
                 SetupDate = order.SetupDate,
+                Buyer = new BuyerViewModel()
+                {
+                    FIO = order.Buyer.FIO,
+                    Id = order.Buyer.Id,
+                    IsLegalEntity = order.Buyer.IsLegalEntity,
+                    Phone = order.Buyer.Phone
+                },
+                Seller = new SellerViewModel()
+                {
+                    Email = order.Seller.Email,
+                    FIO = order.Seller.FIO,
+                    Id = order.Seller.Id,
+                    PercentFromOrder = order.Seller.PercentFromOrder,
+                    Phone = order.Seller.Phone
+                },
             };
             return View((orderVM, orderPositions));
         }
 
         public ActionResult Edit(long orderId)
         {
-            
+
             var buyerName = "";
             var sellerName = "";
             var buyersData = services.buyerService.GetBuyers();
@@ -189,9 +204,22 @@ namespace DataBaseMVCApplication.Controllers
                 Id = order.Id,
                 Price = order.Price,
                 SetupDate = order.SetupDate,
-                Buyer = order.Buyer,
+                Buyer = new BuyerViewModel()
+                {
+                    FIO = order.Buyer.FIO,
+                    Id = order.Buyer.Id,
+                    IsLegalEntity = order.Buyer.IsLegalEntity,
+                    Phone = order.Buyer.Phone
+                },
                 BuyerId = order.BuyerId,
-                Seller = order.Seller,
+                Seller = new SellerViewModel()
+                {
+                    Email = order.Seller.Email,
+                    FIO = order.Seller.FIO,
+                    Id = order.Seller.Id,
+                    PercentFromOrder = order.Seller.PercentFromOrder,
+                    Phone = order.Seller.Phone
+                },
                 SellerId = order.SellerId,
                 OrderPositions = orderPositionsVM
             };
@@ -222,7 +250,7 @@ namespace DataBaseMVCApplication.Controllers
                     seller.FIO += " " + e.Phone;
                     sellers.Add(seller);
                 }
-                if(seller.Id == order.SellerId)
+                if (seller.Id == order.SellerId)
                 {
                     sellerName = seller.FIO;
                 }

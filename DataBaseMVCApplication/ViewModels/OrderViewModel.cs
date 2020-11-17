@@ -13,8 +13,8 @@ namespace DataBaseMVCApplication.ViewModels
         public long Id { get; set; }
         public long SellerId { get; set; }
         public long BuyerId { get; set; }
-        public Seller Seller { get; set; }
-        public Buyer Buyer { get; set; }
+        public SellerViewModel Seller { get; set; }
+        public BuyerViewModel Buyer { get; set; }
         [DisplayName("Нужна доставка")]
         public bool IsDeliver { get; set; }
         [DisplayName("Нужна установка")]
