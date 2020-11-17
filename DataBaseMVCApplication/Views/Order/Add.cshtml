@@ -54,7 +54,7 @@
     <datalist id="windows">
         @foreach (var e in Model.Item4)
         {
-            <option value="@String.Format("{0} производитель {1} цвет {2} наличие:{3} цена:{4}",e.Description,e.ManufactorName,e.Color,e.Having?"В наличии":"Нет в наличии",e.Price)">
+            <option value="@String.Format("{0} производитель {1} цвет {2} наличие-{3} цена:{4}",e.Description,e.ManufactorName,e.Color,e.Having?"В наличии":"Нет в наличии",e.Price)">
 
             </option>
         }
@@ -64,7 +64,7 @@
     <ul id="windowsList" hidden>
         @foreach (var e in Model.Item4)
         {
-        <li id="@e.Id">@String.Format("{0} производитель {1} цвет {2} наличие:{3} цена:{4}", e.Description, e.ManufactorName, e.Color, e.Having ? "В наличии" : "Нет в наличии", e.Price)</li>
+        <li id="@e.Id">@String.Format("{0} производитель {1} цвет {2} наличие-{3} цена:{4}", e.Description, e.ManufactorName, e.Color, e.Having ? "В наличии" : "Нет в наличии", e.Price)</li>
         }
     </ul>
 
@@ -130,7 +130,7 @@
         </div>
     </div>
 </div>
-
+<script src="https://yastatic.net/jquery/3.3.1/jquery.min.js"></script>
 
 <script  src="~/Scripts/ScriptsForViews/addPositionOrder.js">
 

@@ -15,17 +15,37 @@ namespace DataBaseMVCApplication.Controllers
         public ActionResult Index()
         {
             int orderData = services.orderService.GetOrders().Count();
-            var orders = services.orderService.GetOrders().Select(e => new OrderViewModel()
+            var orders = services.orderService.GetOrders().Select(e =>
             {
-                Id = e.Id,
-                DeliverDate = e.DeliverDate,
-                IsDeliver = e.IsDeliver,
-                IsSetup = e.IsSetup,
-                OrderDate = e.OrderDate,
-                Price = e.Price,
-                SetupDate = e.SetupDate,
-                BuyerId = e.BuyerId,
-                SellerId = e.SellerId
+                var buyer = services.buyerService.GetBuyer(e.BuyerId);
+                var seller = services.sellerService.GetSeller(e.SellerId);
+                return new OrderViewModel()
+                {
+                    Id = e.Id,
+                    DeliverDate = e.DeliverDate,
+                    IsDeliver = e.IsDeliver,
+                    IsSetup = e.IsSetup,
+                    OrderDate = e.OrderDate,
+                    Price = e.Price,
+                    SetupDate = e.SetupDate,
+                    BuyerId = e.BuyerId,
+                    SellerId = e.SellerId,
+                    Buyer = new BuyerViewModel()
+                    {
+                        FIO = buyer.FIO,
+                        Id = buyer.Id,
+                        IsLegalEntity = buyer.IsLegalEntity,
+                        Phone = buyer.Phone
+                    }
+                    ,
+                    Seller = new SellerViewModel()
+                    {
+                        Email = seller.Email,
+                        FIO = seller.FIO,
+                        Id = seller.Id,
+                        Phone = seller.Phone
+                    }
+                };
             });
             return View(orders);
         }

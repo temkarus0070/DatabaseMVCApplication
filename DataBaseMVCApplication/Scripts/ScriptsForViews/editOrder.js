@@ -1,10 +1,86 @@
-﻿var i = 1;
+﻿var count = $("#orderPositions").eq(0).children("tbody").children("tr").length - 1;
+console.log(count);
+var i = count + 1;
 var orderId = parseInt($("#orderId").eq(0).val());
+var n = parseInt($("#countPositions").eq(0).val());
+var numbersForPrice = Array();
+if (n != -1)
+    fillArray(n);
 
 
+function fillArray(index) {
+    var index1 = 0;
+    $("#orderPositions").eq(0).children("tbody").eq(0).children("tr").each(function () {
+        var current = $(this).eq(0);
+        if (current.children("th").length == 0) {
+            numbersForPrice[index1] = new Array(3);
+            var window = current.children("td").eq(0).children("input").eq(0).val();
+            var length = current.children("td").eq(1).children("input").eq(0).val();
+            var width = current.children("td").eq(2).children("input").eq(0).val();
+            var indexS = window.indexOf(':');
+            var price = parseFloat(window.slice(indexS + 1, window.Length));
+            length = parseFloat(length);
+            if (length == NaN)
+                length = 0;
+            var width = parseFloat(width);
+            if (width == NaN)
+                width = 0;
+            numbersForPrice[index1][0] = price;
+            numbersForPrice[index1][1] = length;
+            numbersForPrice[index1][2] = width;
+            index1++;
+
+        }
+    });
+
+}
+
+function changeWindow(input, id) {
+    var str = input.value;
+    var index = str.indexOf(':')
+    if (index != -1) {
+        var price = parseFloat(str.slice(index + 1, str.Length));
+        if (price == NaN)
+            price = 0;
+        numbersForPrice[id][0] = price;
+        CalculatePrice();
+    }
+}
+
+function changeLength(input, id) {
+    var str = input.value;
+    var length = parseFloat(str);
+    if (length == NaN)
+        length = 0;
+    numbersForPrice[id][1] = length;
+    CalculatePrice();
+}
+
+function changeWidth(input, id) {
+    var str = input.value;
+    var width = parseFloat(str);
+    if (width == NaN)
+        width = 0;
+    numbersForPrice[id][2] = width;
+    CalculatePrice();
+}
 
 
-function deleteOrderPosition (id){
+function CalculatePrice() {
+    var sum = 0;
+    for (var index = 0; index < numbersForPrice.length; index++) {
+        if (numbersForPrice[index] != undefined) {
+            var p = numbersForPrice[index][0];
+            var s = numbersForPrice[index][1] * numbersForPrice[index][2];
+            sum += p * s;
+        }
+
+    }
+    $("#Price").val(sum);
+}
+
+
+function deleteOrderPosition(id) {
     var table = $("#orderPositions").eq(0);
     var rows = table.children("tbody").eq(0).children("tr");
     table.children("tbody").eq(0).children("tr").each(function () {
@@ -20,20 +96,27 @@ function deleteOrderPosition (id){
             tr.remove();
         }
     });
+
 }
 
 
 
 
 function addPositionOrder() {
+    console.log(i);
+    numbersForPrice[i] = new Array(3);
+    for (var index = 0; index < 3; index++) {
+        numbersForPrice[i][index] = 0;
+    }
     var table = $("#orderPositions");
-    table.append('<tr id=' + '"' + i + '"' + '> <td> <input type="text" list="windows" /> </td> <td> <input type="text" /> </td> <td>  <input type="text" /></td> <td> <button class="btn" type="button" onclick="deleteRow(' + i + ');"' + ' >Удалить  </button> </td> </tr>');
+    table.append('<tr id=' + '"' + i + '"' + '> <td> <input type="text" list="windows" onchange="changeWindow(this,' + i + ')" /> </td> <td> <input type="text" onchange="changeLength(this,' + i + ')" /> </td> <td>  <input type="text" onchange="changeWidth(this,' + i + ')" /></td> <td> <button class="btn" type="button" onclick="deleteRow(' + i + ');"' + ' >Удалить  </button> </td> </tr>');
     i++;
 }
 
 
 function deleteRow(rowId) {
     $('#' + rowId).remove();
+    numbersForPrice[rowId] = undefined;
 }
 
 function updateOrderPositions() {
@@ -47,7 +130,7 @@ function updateOrderPositions() {
                 var id = parseInt(row.children(":hidden").eq(0).val());
                 var str = row.children("td").eq(0).children("input").eq(0).val();
                 var windowId;
-                 $("#windowsList").eq(0).children("li").each(function () {
+                $("#windowsList").eq(0).children("li").each(function () {
                     var el = $(this).eq(0);
                     var value = el.eq(0).prop("textContent");
                     if (value === str)
@@ -77,7 +160,7 @@ function updateOrderPositions() {
 
                 var orderPosition = { id: id, Length: length, Width: width, WindowId: windowId, OrderId: orderId };
                 updateOrderPosition(orderPosition);
-               
+
             }
         }
 
@@ -123,6 +206,7 @@ function sendData() {
             order.SellerId = el.eq(0).prop("id");
     });
     order.Id = orderId;
+    order.OrderDate = $("#OrderDate")[0].value;
     order.IsDeliver = $("#IsDeliver")[0].checked;
     order.IsSetup = $("#IsSetup")[0].checked;
     order.DeliverDate = $("#DeliverDate")[0].value;
