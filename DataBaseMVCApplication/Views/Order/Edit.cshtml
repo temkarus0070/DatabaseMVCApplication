@@ -70,7 +70,7 @@
             @Html.LabelFor(model => model.Item1.IsDeliver, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 <div class="checkbox">
-                    <input type="checkbox" id="IsDeliver" />
+                    <input type="checkbox" id="IsDeliver" @(Model.Item1.IsDeliver?"checked":"") />
                 </div>
             </div>
         </div>
@@ -79,7 +79,7 @@
             @Html.LabelFor(model => model.Item1.IsSetup, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 <div class="checkbox">
-                    <input type="checkbox" id="IsSetup" />
+                    <input type="checkbox" id="IsSetup" @(Model.Item1.IsSetup?"checked":"") />
                 </div>
             </div>
         </div>
@@ -87,7 +87,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Item1.OrderDate, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                <input type="datetime-local" id="OrderDate" value="@String.Format("{0}-{1}-{2}T{3}:{4}", Model.Item1.OrderDate.Year, Model.Item1.OrderDate.Month, Model.Item1.OrderDate.Day, Model.Item1.OrderDate.Hour, Model.Item1.OrderDate.Minute)" />
+                <input type="datetime-local" id="OrderDate" value="@String.Format("{0}-{1}-{2}T{3}:{4}", Model.Item1.OrderDate.Year, Model.Item1.OrderDate.Month, Model.Item1.OrderDate.Day, Model.Item1.OrderDate.Hour==0?"0"+Model.Item1.OrderDate.Hour.ToString():Model.Item1.OrderDate.Hour.ToString(), Model.Item1.OrderDate.Minute==0?"0"+Model.Item1.OrderDate.Minute.ToString():Model.Item1.OrderDate.Minute.ToString())" />
                 @Html.ValidationMessageFor(model => model.Item1.OrderDate, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -96,7 +96,7 @@
             @Html.LabelFor(model => model.Item1.DeliverDate, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 <input type="datetime-local" value="@if (Model.Item1.DeliverDate != null)
-                {@String.Format("{0}-{1}-{2}T0{3}:0{4}", Model.Item1.DeliverDate.Value.Year, Model.Item1.DeliverDate.Value.Month, Model.Item1.DeliverDate.Value.Day, Model.Item1.DeliverDate.Value.Hour, Model.Item1.DeliverDate.Value.Minute)}" id="DeliverDate" />
+              {@String.Format("{0}-{1}-{2}T{3}:{4}", Model.Item1.DeliverDate.Value.Year, Model.Item1.DeliverDate.Value.Month, Model.Item1.DeliverDate.Value.Day, Model.Item1.DeliverDate.Value.Hour==0?"0"+Model.Item1.DeliverDate.Value.Hour.ToString():Model.Item1.DeliverDate.Value.Hour.ToString(), Model.Item1.DeliverDate.Value.Minute==0?"0"+Model.Item1.DeliverDate.Value.Minute.ToString():Model.Item1.DeliverDate.Value.Minute.ToString())}" id="DeliverDate" />
             </div>
         </div>
 
@@ -104,7 +104,7 @@
             @Html.LabelFor(model => model.Item1.SetupDate, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 <input type="datetime-local" id="SetupDate" value="@if (Model.Item1.SetupDate != null)
-                {@String.Format("{0}-{1}-{2}T0{3}:0{4}", Model.Item1.SetupDate.Value.Year, Model.Item1.SetupDate.Value.Month, Model.Item1.SetupDate.Value.Day, Model.Item1.SetupDate.Value.Hour, Model.Item1.SetupDate.Value.Minute)}" />
+                {@String.Format("{0}-{1}-{2}T{3}:{4}", Model.Item1.SetupDate.Value.Year, Model.Item1.SetupDate.Value.Month, Model.Item1.SetupDate.Value.Day, Model.Item1.SetupDate.Value.Hour==0?"0"+Model.Item1.SetupDate.Value.Hour.ToString():Model.Item1.SetupDate.Value.Hour.ToString(), Model.Item1.SetupDate.Value.Minute==0?"0"+Model.Item1.SetupDate.Value.Minute.ToString():Model.Item1.SetupDate.Value.Minute.ToString())}" />
             </div>
         </div>
 
