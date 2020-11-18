@@ -10,7 +10,7 @@
 @using (Html.BeginForm("Add", "Window", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
-    <div class="form-horizontal">
+    <div class="form-horizontal" style="display:inline-block;">
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
             @Html.Label("Производитель", htmlAttributes: new { @class = "control-label col-md-2" })
