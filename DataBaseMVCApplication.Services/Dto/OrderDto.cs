@@ -9,6 +9,7 @@ namespace DataBaseMVCApplication.Services
 {
    public class OrderDto
     {
+        public SellerDto Seller { get; set; }
         public long Id { get; set; }
         public long SellerId { get; set; }
         public long BuyerId { get; set; }

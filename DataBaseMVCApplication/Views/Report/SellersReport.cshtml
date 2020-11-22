@@ -1,0 +1,17 @@
+﻿@model HashSet<DataBaseMVCApplication.ViewModels.SellerViewModel>
+
+@{
+    ViewBag.Title = "SellersReport";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm())
+{ 
+    <div class="form-group">
+        <label for="list">Работники</label>
+        @Html.ListBoxFor(Model => Model.First().Id, Model.Select(e => new SelectListItem() { Text = e.FIO, Value = string.Format("{0} {1}", e.Id.ToString(), e.FIO) }).ToList(),new { @id="list",@class="form-control"})
+    </div>
+        <div class="form-group">
+        <input  class="btn-primary btn" type="submit" value="Составить отчёт" />
+    </div>
+}

@@ -13,5 +13,16 @@ namespace DataBaseMVCApplication.Services
         public string Phone { get; set; }
         public string Email { get; set; }
         public double PercentFromOrder { get; set; }
+
+        public override bool Equals(object obj)
+        {
+            var obj1 = (SellerDto)obj;
+            return obj1.Id==this.Id;
+        }
+
+        public override int GetHashCode()
+        {
+            return Id.GetHashCode();
+        }
     }
 }

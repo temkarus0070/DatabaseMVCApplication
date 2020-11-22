@@ -1,0 +1,21 @@
+﻿
+@{
+    ViewBag.Title = "OrdersReport";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    <div class="form-group">
+        <label for="begin">Начало отчётного периода</label>
+        <input class="form-control" type="datetime-local" name="begin" id="begin" />
+    </div>
+    <div class="form-group">
+        <label for="end">Конец отчётного периода</label>
+        <input class="form-control" type="datetime-local" name="end" id="end"/>
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Получить отчёт" class="btn-primary btn"  />
+    </div>
+}
+
