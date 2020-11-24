@@ -93,27 +93,27 @@ function send() {
     );
 
 
-var order = {};
-var buyer = $("#buyerId")[0].value;
-order.BuyerId = buyer;
+    var order = {};
+    var buyer = $("#buyerId")[0].value;
+    order.BuyerId = buyer;
 
 
 
-var seller = $("#sellerId")[0].value;
-order.SellerId = seller;
-order.IsDeliver = $("#IsDeliver")[0].checked;
-order.IsSetup = $("#IsSetup")[0].checked;
-order.DeliverDate = $("#DeliverDate")[0].value;
-order.SetupDate = $("#SetupDate")[0].value;
-order.Price = $("#Price")[0].value;
+    var seller = $("#sellerId")[0].value;
+    order.SellerId = seller;
+    order.IsDeliver = $("#IsDeliver")[0].checked;
+    order.IsSetup = $("#IsSetup")[0].checked;
+    order.DeliverDate = $("#DeliverDate")[0].value;
+    order.SetupDate = $("#SetupDate")[0].value;
+    order.Price = $("#Price")[0].value;
 
-$.ajax({
-    type: "POST",
-    url: "/Order/Add",
-    data: JSON.stringify({ orderViewModel: order, orderPositions: orderPositions, Price: order.Price }),
-    contentType: "application/json; charset=utf-8",
-    dataType: "json"
-});
+    $.ajax({
+        type: "POST",
+        url: "/Order/Add",
+        data: JSON.stringify({ orderViewModel: order, orderPositions: orderPositions, Price: order.Price }),
+        contentType: "application/json; charset=utf-8",
+        dataType: "json"
+    });
 
-document.location.href = "../Order/Index";
+    document.location.href = "../Order/Index";
 }

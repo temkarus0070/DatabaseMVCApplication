@@ -40,30 +40,30 @@
         </div>
 
         <div class="form-group">
-            <label  for="IsSetup">Нужна установка</label>
+            <label for="IsSetup">Нужна установка</label>
             <input class="form-check" type="checkbox" id="IsSetup" @(Model.Item1.IsSetup ? "checked" : "") />
         </div>
 
         <div class="form-group">
-                <label for="OrderDate">Дата заказа</label>
-                <input class="form-control" type="datetime-local" id="OrderDate" value="@String.Format("{0}-{1}-{2}T{3}:{4}", Model.Item1.OrderDate.Year, Model.Item1.OrderDate.Month<10?"0"+Model.Item1.OrderDate.Month.ToString():Model.Item1.OrderDate.Month.ToString(), Model.Item1.OrderDate.Day<10?"0"+Model.Item1.OrderDate.Day.ToString():Model.Item1.OrderDate.Day.ToString(), Model.Item1.OrderDate.Hour==0 || Model.Item1.OrderDate.Hour<10?"0"+Model.Item1.OrderDate.Hour.ToString():Model.Item1.OrderDate.Hour.ToString(), Model.Item1.OrderDate.Minute==0 || Model.Item1.OrderDate.Minute<10 ?"0"+Model.Item1.OrderDate.Minute.ToString():Model.Item1.OrderDate.Minute.ToString())" />
+            <label for="OrderDate">Дата заказа</label>
+            <input class="form-control" type="datetime-local" id="OrderDate" value="@String.Format("{0}-{1}-{2}T{3}:{4}", Model.Item1.OrderDate.Year, Model.Item1.OrderDate.Month<10?"0"+Model.Item1.OrderDate.Month.ToString():Model.Item1.OrderDate.Month.ToString(), Model.Item1.OrderDate.Day<10?"0"+Model.Item1.OrderDate.Day.ToString():Model.Item1.OrderDate.Day.ToString(), Model.Item1.OrderDate.Hour==0 || Model.Item1.OrderDate.Hour<10?"0"+Model.Item1.OrderDate.Hour.ToString():Model.Item1.OrderDate.Hour.ToString(), Model.Item1.OrderDate.Minute==0 || Model.Item1.OrderDate.Minute<10 ?"0"+Model.Item1.OrderDate.Minute.ToString():Model.Item1.OrderDate.Minute.ToString())" />
         </div>
 
         <div class="form-group">
             <label for="DeliverDate">Дата доставки</label>
-                <input class="form-control" type="datetime-local" value="@if (Model.Item1.DeliverDate != null)
+            <input class="form-control" type="datetime-local" value="@if (Model.Item1.DeliverDate != null)
               {@String.Format("{0}-{1}-{2}T{3}:{4}", Model.Item1.DeliverDate.Value.Year, Model.Item1.DeliverDate.Value.Month<10?"0"+Model.Item1.DeliverDate.Value.Month.ToString():Model.Item1.DeliverDate.Value.Month.ToString(), Model.Item1.DeliverDate.Value.Day<10?"0"+Model.Item1.DeliverDate.Value.Day.ToString():Model.Item1.DeliverDate.Value.Day.ToString(), Model.Item1.DeliverDate.Value.Hour==0 || Model.Item1.DeliverDate.Value.Hour<10?"0"+Model.Item1.DeliverDate.Value.Hour.ToString():Model.Item1.DeliverDate.Value.Hour.ToString(), Model.Item1.DeliverDate.Value.Minute==0 || Model.Item1.DeliverDate.Value.Hour<10?"0"+Model.Item1.DeliverDate.Value.Minute.ToString():Model.Item1.DeliverDate.Value.Minute.ToString())}" id="DeliverDate" />
         </div>
 
         <div class="form-group">
-                <label for="SetupDate">Дата установки</label>
-                <input type="datetime-local" class="form-control" id="SetupDate" value="@if (Model.Item1.SetupDate != null)
+            <label for="SetupDate">Дата установки</label>
+            <input type="datetime-local" class="form-control" id="SetupDate" value="@if (Model.Item1.SetupDate != null)
                 {@String.Format("{0}-{1}-{2}T{3}:{4}", Model.Item1.SetupDate.Value.Year, Model.Item1.SetupDate.Value.Month<10?"0"+Model.Item1.SetupDate.Value.Month.ToString():Model.Item1.SetupDate.Value.Month.ToString(), Model.Item1.SetupDate.Value.Day<10?"0"+Model.Item1.SetupDate.Value.Day.ToString():Model.Item1.SetupDate.Value.Day.ToString(), Model.Item1.SetupDate.Value.Hour==0 || Model.Item1.SetupDate.Value.Hour<10?"0"+Model.Item1.SetupDate.Value.Hour.ToString():Model.Item1.SetupDate.Value.Hour.ToString(), Model.Item1.SetupDate.Value.Minute==0 || Model.Item1.SetupDate.Value.Minute<10?"0"+Model.Item1.SetupDate.Value.Minute.ToString():Model.Item1.SetupDate.Value.Minute.ToString())}" />
         </div>
 
         <div class="form-group">
-                <label for="Price">Цена</label>
-                <input class="form-control" disabled type="number" step="0.001" id="Price" value="@Model.Item1.Price.ToString().Replace(",", ".")" />
+            <label for="Price">Цена</label>
+            <input class="form-control" disabled type="number" step="0.001" id="Price" value="@Model.Item1.Price.ToString().Replace(",", ".")" />
         </div>
 
         <div style="margin-bottom:40px">
@@ -98,14 +98,14 @@
                                         <option @(e.WindowId == window.Id ? "selected" : "")
                                                 value="@window.Id">
                                             @String.Format("{0} Производитель {1} цвет {2} наличие-{3} цена:{4}", window.Description, window.ManufactorName, window.Color, window.Having ? "В наличии" : "Нет в наличии", window.Price)
-                                            </option>
-                                        }
+                                        </option>
+                                    }
                                 </select>
 
 
 
                             </td>
-                            <td> <input  class="form-control" type="number" onchange="changeLength(this,@i)" value="@e.Length" /></td>
+                            <td> <input class="form-control" type="number" onchange="changeLength(this,@i)" value="@e.Length" /></td>
                             <td> <input class="form-control" type="number" onchange="changeWidth(this,@i)" value="@e.Width" /></td>
                             <td> <input class="form-control" type="button" value="Удалить" onclick="deleteOrderPosition(@e.Id)" /></td>
                             <input type="hidden" value="@e.Id" />
