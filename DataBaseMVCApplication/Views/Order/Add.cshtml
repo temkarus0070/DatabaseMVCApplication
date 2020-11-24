@@ -1,4 +1,4 @@
-﻿@model (DataBaseMVCApplication.ViewModels.OrderViewModel,HashSet<DataBaseMVCApplication.ViewModels.BuyerViewModel>,HashSet<DataBaseMVCApplication.ViewModels.SellerViewModel>,IEnumerable<DataBaseMVCApplication.ViewModels.WindowViewModel>)
+﻿@model (DataBaseMVCApplication.ViewModels.OrderViewModel, HashSet<DataBaseMVCApplication.ViewModels.BuyerViewModel>, HashSet<DataBaseMVCApplication.ViewModels.SellerViewModel>, IEnumerable<DataBaseMVCApplication.ViewModels.WindowViewModel>)
 
 @{
     ViewBag.Title = "Add";
@@ -7,134 +7,100 @@
 
 
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
-<div class="form-horizontal" style="display:inline-block;">
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-    <div class="form-group">
-        <label for="buyerId">Покупатель</label>
-        <input type="text" list="buyers" name="buyerId" id="buyerId" />
-        <datalist id="buyers">
-            @foreach (var e in Model.Item2)
+    <div class="form-horizontal" style="display:inline-block;">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-group">
+            <label for="buyerId">Покупатель</label>
+            <select class="form-control" id="buyerId" name="buyerId">
+                <option selected></option>
+                @foreach (var e in Model.Item2)
+                {
+                    <option value="@e.Id">@e.FIO</option>
+                }
+            </select>
+            @Html.RouteLink("Добавить покупателя", new { controller = "Buyer", action = "add" }, new { @class = "btn btn-primary", @target = "_blank" })
+        </div>
+        <div class="form-group">
+            <label for="sellerId">Продавец</label>
+            <select class="form-control" id="sellerId" name="sellerId">
+                <option selected></option>
+                @foreach (var e in Model.Item3)
+                {
+                    <option value="@e.Id">@e.FIO</option>
+                }
+            </select>
+        </div>
+
+
+
+
+
+
+
+        <div class="form-group">
+            <label class="col-form-label" for="IsDeliver">Нужна доставка</label>
+            <input type="checkbox" class="form-check" name="IsDeliver" id="IsDeliver" />
+        </div>
+
+        <div class="form-group">
+            <label class="col-form-label" for="IsSetup">Нужна установка</label>
+            <input type="checkbox" class="form-check" name="IsSetup" id="IsSetup" />
+        </div>
+
+
+
+        <div class="form-group">
+                     <label for="DeliverDate">Дата доставки</label>
+                <input class="form-control" type="datetime-local" name="DeliverDate" id="DeliverDate" />
+        </div>
+
+        <div class="form-group">
+                <label for="SetupDate">Дата установки</label>
+                <input class="form-control" type="datetime-local" name="SetupDate" id="SetupDate" />
+        </div>
+
+        <div class="form-group">
+            <label for="Price">Цена</label>
+                <input class="form-control" type="number" name="Price" id="Price" disabled step="0.001" />
+        </div>
+
+        <select id="windowsSelect" class="form-control" hidden>
+            <option selected></option>
+            @foreach (var e in Model.Item4)
             {
-                <option>@e.FIO</option>
+                <option value="@e.Id">@String.Format("{0} производитель {1} цвет {2} наличие-{3} цена:{4}", e.Description, e.ManufactorName, e.Color, e.Having ? "В наличии" : "Нет в наличии", e.Price)</option>
             }
-        </datalist>
-
-        <ul id="buyersList" hidden>
-            @foreach(var e in Model.Item2)
-            {
-                <li id="@e.Id">@e.FIO</li>
-            }
-        </ul>
-        @Html.RouteLink("Добавить покупателя", new { controller = "Buyer", action = "add" },new {@class="btn btn-primary",@target="_blank" })
-    </div>
-    <div class="form-group">
-        <label for="sellerId">Продавец</label>
-        <input type="text" list="sellers" name="sellerId" id="sellerId" />
-        <datalist id="sellers">
-            @foreach (var e in Model.Item3)
-            {
-                <option>@e.FIO</option>
-            }
-        </datalist>
-
-        <ul id="sellersList" hidden>
-            @foreach (var e in Model.Item3)
-            {
-                <li id="@e.Id">@e.FIO</li>
-            }
-        </ul>
-    </div>
+        </select>
 
 
-    <datalist id="windows">
-        @foreach (var e in Model.Item4)
-        {
-            <option value="@String.Format("{0} производитель {1} цвет {2} наличие-{3} цена:{4}",e.Description,e.ManufactorName,e.Color,e.Having?"В наличии":"Нет в наличии",e.Price)">
+        <div class="form-group">
+            <button type="button" onclick="addPositionOrder()">Добавить позицию заказа</button>
+            <table id="orderPositions">
+                <tr>
+                    <th>Окно</th>
+                    <th>Длина</th>
+                    <th>Ширина</th>
+                    <th></th>
+                </tr>
+            </table>
+        </div>
 
-            </option>
-        }
-
-    </datalist>
-
-    <ul id="windowsList" hidden>
-        @foreach (var e in Model.Item4)
-        {
-        <li id="@e.Id">@String.Format("{0} производитель {1} цвет {2} наличие-{3} цена:{4}", e.Description, e.ManufactorName, e.Color, e.Having ? "В наличии" : "Нет в наличии", e.Price)</li>
-        }
-    </ul>
-
-
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.Item1.IsDeliver, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            <div class="checkbox">
-                <input  type="checkbox" name="IsDeliver" id="IsDeliver" />
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="button" value="Добавить" onclick="send()" class="btn btn-dark" id="addBtn" />
             </div>
         </div>
     </div>
+    <script src="https://yastatic.net/jquery/3.3.1/jquery.min.js"></script>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.Item1.IsSetup, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            <div class="checkbox">
-                <input type="checkbox" name="IsSetup" id="IsSetup" />
-            </div>
-        </div>
-    </div>
+    <script src="~/Scripts/ScriptsForViews/addPositionOrder.js">
 
-
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.Item1.DeliverDate, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            <input type="datetime" name="DeliverDate" id="DeliverDate"/>
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.Item1.SetupDate, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            <input type="datetime" name="SetupDate" id="SetupDate" />
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.Item1.Price, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            <input type="number" name="Price" id="Price" step="0.001" />
-        </div>
-    </div>
-
-
-    <div class="form-group">
-        <button type="button" onclick="addPositionOrder()">Добавить позицию заказа</button>
-        <table id="orderPositions">
-            <tr>
-                <th>Окно</th>
-                <th>Длина</th>
-                <th>Ширина</th>
-                <th></th>
-            </tr>
-        </table>
-    </div>
-
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="button" value="Добавить" onclick="send()" class="btn btn-dark" id="addBtn" />
-        </div>
-    </div>
-</div>
-<script src="https://yastatic.net/jquery/3.3.1/jquery.min.js"></script>
-
-<script  src="~/Scripts/ScriptsForViews/addPositionOrder.js">
-
-</script>
+    </script>
 
 }
 

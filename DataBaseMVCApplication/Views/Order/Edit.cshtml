@@ -16,122 +16,68 @@
 
 
         <div class="form-group">
-            @Html.Label("Продавец", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <input type="text" id="sellerId" list="sellers" value="@ViewBag.SellerName" />
-            </div>
-        </div>
-
-
-
-
-        <datalist id="sellers">
-            @foreach (var e in Model.Item3)
-            {
-                <option>@e.FIO</option>
-            }
-        </datalist>
-
-        <ul id="sellersList" hidden>
-            @foreach (var e in Model.Item3)
-            {
-                <li id="@e.Id">@e.FIO</li>
-            }
-        </ul>
-
-        <div class="form-group">
-            @Html.Label("Покупатель", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <input type="text" id="buyerId" list="buyers" value="@ViewBag.BuyerName" />
-            </div>
-        </div>
-
-        <datalist id="buyers">
-            @foreach (var e in Model.Item2)
-            {
-                <option>@e.FIO</option>
-            }
-        </datalist>
-
-        <ul id="buyersList" hidden>
-            @foreach (var e in Model.Item2)
-            {
-                <li id="@e.Id">@e.FIO</li>
-            }
-        </ul>
-
-
-
-
-
-
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Item1.IsDeliver, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <div class="checkbox">
-                    <input type="checkbox" id="IsDeliver" @(Model.Item1.IsDeliver ? "checked" : "") />
-                </div>
-            </div>
+            <label class="col-form-label" for="buyerId">Покупатель</label>
+            <select id="buyerId" class="form-control">
+                @foreach (var e in Model.Item2)
+                {
+                    <option @(e.Id == Model.Item1.BuyerId ? "selected" : "") value="@e.Id">@e.FIO</option>
+                }
+            </select>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Item1.IsSetup, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <div class="checkbox">
-                    <input type="checkbox" id="IsSetup" @(Model.Item1.IsSetup ? "checked" : "") />
-                </div>
-            </div>
+            <label class="col-form-label" for="sellerId">Продавец</label>
+            <select class="form-control" id="sellerId">
+                @foreach (var e in Model.Item3)
+                {
+                    <option @(e.Id == Model.Item1.SellerId ? "selected" : "") value="@e.Id">@e.FIO</option>
+                }
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="IsDeliver">Нужна доставка</label>
+            <input class="form-check" type="checkbox" id="IsDeliver" @(Model.Item1.IsDeliver ? "checked" : "") />
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Item1.OrderDate, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <input type="datetime-local" id="OrderDate" value="@String.Format("{0}-{1}-{2}T{3}:{4}", Model.Item1.OrderDate.Year, Model.Item1.OrderDate.Month<10?"0"+Model.Item1.OrderDate.Month.ToString():Model.Item1.OrderDate.Month.ToString(), Model.Item1.OrderDate.Day<10?"0"+Model.Item1.OrderDate.Day.ToString():Model.Item1.OrderDate.Day.ToString(), Model.Item1.OrderDate.Hour==0 || Model.Item1.OrderDate.Hour<10?"0"+Model.Item1.OrderDate.Hour.ToString():Model.Item1.OrderDate.Hour.ToString(), Model.Item1.OrderDate.Minute==0 || Model.Item1.OrderDate.Minute<10 ?"0"+Model.Item1.OrderDate.Minute.ToString():Model.Item1.OrderDate.Minute.ToString())" />
-                @Html.ValidationMessageFor(model => model.Item1.OrderDate, "", new { @class = "text-danger" })
-            </div>
+            <label  for="IsSetup">Нужна установка</label>
+            <input class="form-check" type="checkbox" id="IsSetup" @(Model.Item1.IsSetup ? "checked" : "") />
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Item1.DeliverDate, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <input type="datetime-local" value="@if (Model.Item1.DeliverDate != null)
+                <label for="OrderDate">Дата заказа</label>
+                <input class="form-control" type="datetime-local" id="OrderDate" value="@String.Format("{0}-{1}-{2}T{3}:{4}", Model.Item1.OrderDate.Year, Model.Item1.OrderDate.Month<10?"0"+Model.Item1.OrderDate.Month.ToString():Model.Item1.OrderDate.Month.ToString(), Model.Item1.OrderDate.Day<10?"0"+Model.Item1.OrderDate.Day.ToString():Model.Item1.OrderDate.Day.ToString(), Model.Item1.OrderDate.Hour==0 || Model.Item1.OrderDate.Hour<10?"0"+Model.Item1.OrderDate.Hour.ToString():Model.Item1.OrderDate.Hour.ToString(), Model.Item1.OrderDate.Minute==0 || Model.Item1.OrderDate.Minute<10 ?"0"+Model.Item1.OrderDate.Minute.ToString():Model.Item1.OrderDate.Minute.ToString())" />
+        </div>
+
+        <div class="form-group">
+            <label for="DeliverDate">Дата доставки</label>
+                <input class="form-control" type="datetime-local" value="@if (Model.Item1.DeliverDate != null)
               {@String.Format("{0}-{1}-{2}T{3}:{4}", Model.Item1.DeliverDate.Value.Year, Model.Item1.DeliverDate.Value.Month<10?"0"+Model.Item1.DeliverDate.Value.Month.ToString():Model.Item1.DeliverDate.Value.Month.ToString(), Model.Item1.DeliverDate.Value.Day<10?"0"+Model.Item1.DeliverDate.Value.Day.ToString():Model.Item1.DeliverDate.Value.Day.ToString(), Model.Item1.DeliverDate.Value.Hour==0 || Model.Item1.DeliverDate.Value.Hour<10?"0"+Model.Item1.DeliverDate.Value.Hour.ToString():Model.Item1.DeliverDate.Value.Hour.ToString(), Model.Item1.DeliverDate.Value.Minute==0 || Model.Item1.DeliverDate.Value.Hour<10?"0"+Model.Item1.DeliverDate.Value.Minute.ToString():Model.Item1.DeliverDate.Value.Minute.ToString())}" id="DeliverDate" />
-            </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Item1.SetupDate, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <input type="datetime-local" id="SetupDate" value="@if (Model.Item1.SetupDate != null)
+                <label for="SetupDate">Дата установки</label>
+                <input type="datetime-local" class="form-control" id="SetupDate" value="@if (Model.Item1.SetupDate != null)
                 {@String.Format("{0}-{1}-{2}T{3}:{4}", Model.Item1.SetupDate.Value.Year, Model.Item1.SetupDate.Value.Month<10?"0"+Model.Item1.SetupDate.Value.Month.ToString():Model.Item1.SetupDate.Value.Month.ToString(), Model.Item1.SetupDate.Value.Day<10?"0"+Model.Item1.SetupDate.Value.Day.ToString():Model.Item1.SetupDate.Value.Day.ToString(), Model.Item1.SetupDate.Value.Hour==0 || Model.Item1.SetupDate.Value.Hour<10?"0"+Model.Item1.SetupDate.Value.Hour.ToString():Model.Item1.SetupDate.Value.Hour.ToString(), Model.Item1.SetupDate.Value.Minute==0 || Model.Item1.SetupDate.Value.Minute<10?"0"+Model.Item1.SetupDate.Value.Minute.ToString():Model.Item1.SetupDate.Value.Minute.ToString())}" />
-            </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Item1.Price, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <input type="number" step="0.001" id="Price" value="@Model.Item1.Price.ToString().Replace(",", ".")" />
-            </div>
+                <label for="Price">Цена</label>
+                <input class="form-control" disabled type="number" step="0.001" id="Price" value="@Model.Item1.Price.ToString().Replace(",", ".")" />
         </div>
 
         <div style="margin-bottom:40px">
             <button type="button" class="btn-outline-dark" onclick="addPositionOrder()">Добавить позицию заказа</button>
 
-            <datalist id="windows">
+
+
+            <select class="form-control" id="windowsSelect" hidden>
+                <option selected></option>
                 @foreach (var e in Model.Item4)
                 {
-                    <option value="@String.Format("{0} производитель {1} цвет {2} наличие-{3} цена:{4}", e.Description, e.ManufactorName, e.Color, e.Having ? "В наличии" : "Нет в наличии", e.Price)"></option>
+                    <option value="@e.Id">@String.Format("{0} производитель {1} цвет {2} наличие-{3} цена:{4}", e.Description, e.ManufactorName, e.Color, e.Having ? "В наличии" : "Нет в наличии", e.Price)</option>
                 }
-
-            </datalist>
-
-            <ul id="windowsList" hidden>
-                @foreach (var e in Model.Item4)
-                {
-                    <li id="@e.Id">@String.Format("{0} производитель {1} цвет {2} наличие-{3} цена:{4}", e.Description, e.ManufactorName, e.Color, e.Having ? "В наличии" : "Нет в наличии", e.Price)</li>
-                }
-            </ul>
+            </select>
 
 
             <table id="orderPositions" class="table">
@@ -144,11 +90,24 @@
                     foreach (var e in Model.Item1.OrderPositions)
                     {
                         i++;
-                        <tr>
-                            <td> <input list="windows" type="text" onchange="changeWindow(this,@i)" value="@String.Format("{0} производитель {1} цвет {2} наличие-{3} цена:{4}", e.Window.Description, e.Window.ManufactorName, e.Window.Color, e.Window.Having ? "В наличии" : "Нет в наличии", e.Window.Price)" /></td>
-                            <td> <input type="number" onchange="changeLength(this,@i)" value="@e.Length" /></td>
-                            <td> <input type="number" onchange="changeWidth(this,@i)" value="@e.Width" /></td>
-                            <td> <input type="button" value="Удалить" onclick="deleteOrderPosition(@e.Id)" /></td>
+                        <tr id="@i">
+                            <td>
+                                <select class="form-control" id="windowsSelect" onchange="changeWindow(this, @i)">
+                                    @foreach (var window in Model.Item4)
+                                    {
+                                        <option @(e.WindowId == window.Id ? "selected" : "")
+                                                value="@window.Id">
+                                            @String.Format("{0} Производитель {1} цвет {2} наличие-{3} цена:{4}", window.Description, window.ManufactorName, window.Color, window.Having ? "В наличии" : "Нет в наличии", window.Price)
+                                            </option>
+                                        }
+                                </select>
+
+
+
+                            </td>
+                            <td> <input  class="form-control" type="number" onchange="changeLength(this,@i)" value="@e.Length" /></td>
+                            <td> <input class="form-control" type="number" onchange="changeWidth(this,@i)" value="@e.Width" /></td>
+                            <td> <input class="form-control" type="button" value="Удалить" onclick="deleteOrderPosition(@e.Id)" /></td>
                             <input type="hidden" value="@e.Id" />
                         </tr>
 

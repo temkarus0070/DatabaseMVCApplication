@@ -14,7 +14,7 @@ function fillArray(index) {
         var current = $(this).eq(0);
         if (current.children("th").length == 0) {
             numbersForPrice[index1] = new Array(3);
-            var window = current.children("td").eq(0).children("input").eq(0).val();
+            var window = current.children("td").eq(0).children("select").eq(0).children("option:selected").eq(0).text();
             var length = current.children("td").eq(1).children("input").eq(0).val();
             var width = current.children("td").eq(2).children("input").eq(0).val();
             var indexS = window.indexOf(':');
@@ -36,7 +36,7 @@ function fillArray(index) {
 }
 
 function changeWindow(input, id) {
-    var str = input.value;
+    var str = input.outerText;
     var index = str.indexOf(':')
     if (index != -1) {
         var price = parseFloat(str.slice(index + 1, str.Length));
@@ -81,11 +81,13 @@ function CalculatePrice() {
 
 
 function deleteOrderPosition(id) {
+    var rowIndex = 0;
     var table = $("#orderPositions").eq(0);
     var rows = table.children("tbody").eq(0).children("tr");
     table.children("tbody").eq(0).children("tr").each(function () {
         var tr = $(this).eq(0);
         if (tr.children(":hidden").length != 0 && tr.children(":hidden")[0].value == id) {
+            rowIndex = parseInt(tr.prop("id"));
             $.ajax({
                 type: "POST",
                 url: "/OrderPosition/Delete",
@@ -96,6 +98,12 @@ function deleteOrderPosition(id) {
             tr.remove();
         }
     });
+
+    numbersForPrice[rowIndex][0] = 0;
+    numbersForPrice[rowIndex][1] = 0;
+    numbersForPrice[rowIndex][2] = 0;
+
+    CalculatePrice();
 
 }
 
@@ -109,7 +117,24 @@ function addPositionOrder() {
         numbersForPrice[i][index] = 0;
     }
     var table = $("#orderPositions");
-    table.append('<tr id=' + '"' + i + '"' + '> <td> <input type="text" list="windows" onchange="changeWindow(this,' + i + ')" /> </td> <td> <input type="text" onchange="changeLength(this,' + i + ')" /> </td> <td>  <input type="text" onchange="changeWidth(this,' + i + ')" /></td> <td> <button class="btn" type="button" onclick="deleteRow(' + i + ');"' + ' >Удалить  </button> </td> </tr>');
+    table.append('<tr id=' + '"' + i + '"' + '> <td> </td> <td> <input class="form-control" type="text" onchange="changeLength(this,' + i + ')" /> </td> <td>  <input class="form-control" type="text" onchange="changeWidth(this,' + i + ')" /></td> <td> <button class="form-control" type="button" onclick="deleteRow(' + i + ');"' + ' >Удалить  </button> </td> </tr>');
+    var row = table.children("tbody").eq(0).children("tr").eq(i);
+    var index = i;
+    $("#windowsSelect").eq(0).clone()
+        .removeAttr("hidden")
+        .change(function () {
+            var str = $(this).children("option:selected").eq(0).text();
+            var i = str.indexOf(':')
+            if (i != -1) {
+                var price = parseFloat(str.slice(i + 1, str.Length));
+                if (price == NaN)
+                    price = 0;
+                numbersForPrice[index][0] = price;
+                CalculatePrice();
+            }
+        })
+        .appendTo(row.children("td").eq(0))
+        ;
     i++;
 }
 
@@ -129,7 +154,7 @@ function updateOrderPositions() {
             if (row.children(":hidden").length == 0) {
                 var id = parseInt(row.children(":hidden").eq(0).val());
                 var str = row.children("td").eq(0).children("input").eq(0).val();
-                var windowId;
+                var windowId = row.children("td").eq(0).children("select").eq(0).val();
                 $("#windowsList").eq(0).children("li").each(function () {
                     var el = $(this).eq(0);
                     var value = el.eq(0).prop("textContent");
@@ -148,13 +173,7 @@ function updateOrderPositions() {
             else {
                 var id = parseInt(row.children(":hidden").eq(0).val());
                 var str = row.children("td").eq(0).children("input").eq(0).val();
-                var windowId;
-                $("#windowsList").eq(0).children("li").each(function () {
-                    var el = $(this).eq(0);
-                    var value = el.eq(0).prop("textContent");
-                    if (value === str)
-                        windowId = el.eq(0).prop("id");
-                });
+                var windowId = row.children("td").eq(0).children("select").eq(0).val();
                 var length = row.children("td").eq(1).children("input").eq(0).val();
                 var width = row.children("td").eq(2).children("input").eq(0).val();
 
@@ -189,22 +208,12 @@ function addOrderPosition(orderPosition) {
 
 function sendData() {
     var order = {};
-    var buyer = $("#buyerId")[0].value;
-    $("#buyersList").eq(0).children("li").each(function () {
-        var el = $(this).eq(0);
-        var text = el.prop("textContent");
-        if (text == buyer)
-            order.BuyerId = el.eq(0).prop("id");
-    });
+    var buyer = $("#buyerId").eq(0).val();
+    order.BuyerId = buyer;
 
 
-    var seller = $("#sellerId")[0].value;
-    $("#sellersList").eq(0).children("li").each(function () {
-        var el = $(this).eq(0);
-        var text = el.prop("textContent");
-        if (text == seller)
-            order.SellerId = el.eq(0).prop("id");
-    });
+    var seller = $("#sellerId").eq(0).val();
+    order.SellerId = seller;
     order.Id = orderId;
     order.OrderDate = $("#OrderDate")[0].value;
     order.IsDeliver = $("#IsDeliver")[0].checked;

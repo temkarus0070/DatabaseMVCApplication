@@ -4,17 +4,7 @@ var i = 1;
 var numbersForPrice = Array();
 
 
-function changeWindow(input, id) {
-    var str = input.value;
-    var i = str.indexOf(':')
-    if (i != -1) {
-        var price = parseFloat(str.slice(i + 1, str.Length));
-        if (price == NaN)
-            price = 0;
-        numbersForPrice[id][0] = price;
-        CalculatePrice();
-    }
-}
+
 
 function changeLength(input, id) {
     var str = input.value;
@@ -43,7 +33,7 @@ function CalculatePrice() {
             var s = numbersForPrice[index][1] * numbersForPrice[index][2];
             sum += p * s;
         }
-        
+
     }
     $("#Price").val(sum);
 }
@@ -56,7 +46,24 @@ function addPositionOrder() {
         numbersForPrice[i][index] = 0;
     }
     var table = $("#orderPositions");
-    table.append('<tr id=' + '"' + i + '"' + '> <td> <input type="text" list="windows" onchange="changeWindow(this,' + i + ')" /> </td> <td> <input type="text" onchange="changeLength(this,'+i+')" /> </td> <td>  <input type="text" onchange="changeWidth(this,'+i+')" /></td> <td> <button class="btn" type="button" onclick="deleteRow(' + i + ');"' + ' >Удалить  </button> </td> </tr>');
+    table.append('<tr id=' + '"' + i + '"' + '> <td>  </td> <td> <input class="form-control" type="text" onchange="changeLength(this,' + i + ')" /> </td> <td>  <input class="form-control" type="text" onchange="changeWidth(this,' + i + ')" /></td> <td> <button class="btn-primary" type="button" onclick="deleteRow(' + i + ');"' + ' >Удалить  </button> </td> </tr>');
+    var row = table.children("tbody").eq(0).children("tr").eq(i);
+    var index = i;
+    $("#windowsSelect").eq(0).clone()
+        .removeAttr("hidden")
+        .change(function () {
+            var str = $(this).children("option:selected").eq(0).text();
+            var i = str.indexOf(':')
+            if (i != -1) {
+                var price = parseFloat(str.slice(i + 1, str.Length));
+                if (price == NaN)
+                    price = 0;
+                numbersForPrice[index][0] = price;
+                CalculatePrice();
+            }
+        })
+        .appendTo(row.children("td").eq(0))
+        ;
     i++;
 }
 
@@ -67,6 +74,7 @@ function addPositionOrder() {
 function deleteRow(rowId) {
     $('#' + rowId).remove();
     numbersForPrice[rowId] = undefined;
+    i--;
     CalculatePrice();
 }
 
@@ -74,55 +82,38 @@ function send() {
     var orderPositions = new Array();
     $("#orderPositions TBODY TR").each(function () {
         var row = $(this);
-        var orderPosition = {};
-        if (row.find("TD").eq(0).children("input")[0] != null) {
-            var str = row.find("TD").eq(0).children("input")[0].value;
-            var id = $("#windowsList").eq(0).children("li").each(function () {
-                var el = $(this).eq(0);
-                var value = el.eq(0).prop("textContent");
-                if (value === str)
-                    orderPosition.WindowId = el.eq(0).prop("id");
-            });
-
-            orderPosition.Length = row.find("TD").eq(1).children("input")[0].value;
-            orderPosition.Width = row.find("TD").eq(2).children("input")[0].value;
+        if (row.children("th").length == 0) {
+            var orderPosition = {};
+            orderPosition.WindowId = row.find("td").eq(0).children("select").eq(0).val();
+            orderPosition.Length = row.find("TD").eq(1).children("input").eq(0).val();
+            orderPosition.Width = row.find("TD").eq(2).children("input").eq(0).val();
             orderPositions.push(orderPosition);
         }
     }
     );
 
 
-    var order = {};
-    var buyer = $("#buyerId")[0].value;
-    $("#buyersList").eq(0).children("li").each(function () {
-        var el = $(this).eq(0);
-        var text = el.prop("textContent");
-        if (text === buyer)
-            order.BuyerId = el.eq(0).prop("id");
-    });
+var order = {};
+var buyer = $("#buyerId")[0].value;
+order.BuyerId = buyer;
 
 
-    var seller = $("#sellerId")[0].value;
-    $("#sellersList").eq(0).children("li").each(function () {
-        var el = $(this).eq(0);
-        var text = el.prop("textContent");
-        if (text === seller)
-            order.SellerId = el.eq(0).prop("id");
-    });
 
-    order.IsDeliver = $("#IsDeliver")[0].checked;
-    order.IsSetup = $("#IsSetup")[0].checked;
-    order.DeliverDate = $("#DeliverDate")[0].value;
-    order.SetupDate = $("#SetupDate")[0].value;
-    order.Price = $("#Price")[0].value;
+var seller = $("#sellerId")[0].value;
+order.SellerId = seller;
+order.IsDeliver = $("#IsDeliver")[0].checked;
+order.IsSetup = $("#IsSetup")[0].checked;
+order.DeliverDate = $("#DeliverDate")[0].value;
+order.SetupDate = $("#SetupDate")[0].value;
+order.Price = $("#Price")[0].value;
 
-    $.ajax({
-        type: "POST",
-        url: "/Order/Add",
-        data: JSON.stringify({ orderViewModel: order, orderPositions: orderPositions, Price: order.Price }),
-        contentType: "application/json; charset=utf-8",
-        dataType: "json"
-    });
+$.ajax({
+    type: "POST",
+    url: "/Order/Add",
+    data: JSON.stringify({ orderViewModel: order, orderPositions: orderPositions, Price: order.Price }),
+    contentType: "application/json; charset=utf-8",
+    dataType: "json"
+});
 
-    document.location.href = "../Order/Index";
+document.location.href = "../Order/Index";
 }
