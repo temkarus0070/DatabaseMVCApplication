@@ -73,7 +73,7 @@ namespace DataBaseMVCApplication.Controllers
         }
 
         [HttpPost]
-        public ActionResult Edit(SellerViewModel seller)
+        public RedirectToRouteResult Edit(SellerViewModel seller)
         {
             services.sellerService.UpdateSeller(new SellerDto()
             {
@@ -84,7 +84,7 @@ namespace DataBaseMVCApplication.Controllers
                 Phone = seller.Phone
                
             });
-            return View(seller);
+            return RedirectToRoute("Index");
         }
 
         public void Delete(string sellerId)

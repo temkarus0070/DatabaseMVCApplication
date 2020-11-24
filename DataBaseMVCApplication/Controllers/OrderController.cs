@@ -63,7 +63,8 @@ namespace DataBaseMVCApplication.Controllers
                 Color = e.Color,
                 Having = e.Having,
                 Price = e.Price,
-                ManufactorName = e.Manufactor.Name
+                ManufactorName = e.Manufactor.Name,
+                 Model=e.Model
 
 
             });
@@ -140,7 +141,8 @@ namespace DataBaseMVCApplication.Controllers
                     Id = e.Window.Id,
                     Image = e.Window.Image,
                     ManufactorName = e.Window.Manufactor.Name,
-                    Price = e.Window.Price
+                    Price = e.Window.Price,
+                     Model=e.Window.Model
                 }
             });
             var orderVM = new OrderViewModel()
@@ -189,7 +191,8 @@ namespace DataBaseMVCApplication.Controllers
                 Color = e.Color,
                 Having = e.Having,
                 Price = e.Price,
-                ManufactorName = e.Manufactor.Name
+                ManufactorName = e.Manufactor.Name,
+                Model = e.Model
 
 
             });
@@ -212,7 +215,8 @@ namespace DataBaseMVCApplication.Controllers
                     Image = e.Window.Image,
                     ManufactorId = e.Window.ManufactorId,
                     ManufactorName = e.Window.Manufactor.Name,
-                    Price = e.Window.Price
+                    Price = e.Window.Price,
+                     Model=e.Window.Model
                 }
             }).ToList();
             var orderData = new OrderViewModel()

@@ -45,10 +45,12 @@ namespace DataBaseMVCApplication.Controllers
                 Image = imageData,
                 Having = window.Having,
                 ManufactorId = window.ManufactorId,
-                Price = window.Price
+                Price = window.Price,
+                Model = window.Model
+
             };
             services.windowsServices.AddWindow(windowDto);
-            return RedirectToRoute(new { controller="Home",action="Index"});
+            return RedirectToRoute(new { controller = "Home", action = "Index" });
         }
 
         public ActionResult Edit(long id)
@@ -63,7 +65,9 @@ namespace DataBaseMVCApplication.Controllers
                 Image = window.Image,
                 ManufactorId = window.ManufactorId,
                 ManufactorName = window.Manufactor.Name,
-                Price = window.Price
+                Price = window.Price,
+                Model = window.Model
+
             };
             return View(windowVM);
         }
@@ -79,7 +83,8 @@ namespace DataBaseMVCApplication.Controllers
                 Having = windowViewModel.Having,
                 Id = windowViewModel.Id,
                 ManufactorId = windowViewModel.ManufactorId,
-                Price = windowViewModel.Price
+                Price = windowViewModel.Price,
+                Model = windowViewModel.Model
             };
             byte[] array;
             if (UploadImage != null)

@@ -36,7 +36,8 @@ namespace DataBaseMVCApplication.Controllers
                     Image = window.Image,
                     ManufactorId = window.ManufactorId,
                     ManufactorName = window.Manufactor.Name,
-                    Price = window.Price
+                    Price = window.Price,
+                     Model=window.Model
                 }).ToList();
             }
             else
@@ -50,6 +51,7 @@ namespace DataBaseMVCApplication.Controllers
                     Image = window.Image,
                     ManufactorId = window.ManufactorId,
                     ManufactorName = window.Manufactor.Name,
+                    Model=window.Model,
                     Price = window.Price
                 }).ToList();
             }
@@ -68,7 +70,8 @@ namespace DataBaseMVCApplication.Controllers
                 Image = window.Image,
                 ManufactorId = window.ManufactorId,
                 Price = window.Price,
-                ManufactorName = window.Manufactor.Name
+                ManufactorName = window.Manufactor.Name,
+                 Model=window.Model
             };
             return View(windowVM);
         }

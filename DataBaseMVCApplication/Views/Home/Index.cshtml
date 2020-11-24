@@ -5,21 +5,21 @@
 }
 
 
-    <div class="d-flex flex-row justify-content-between" style="margin-bottom:40px">
-        @Html.ActionLink("Добавить окно", "Add", "Window", null, new { @class = "btn btn-primary" })
-        @using (Html.BeginForm("Index", "Home"))
-        {
-            @Html.DropDownList("ManufactorId", Model.Item2.Select(e =>
+<div class="d-flex flex-row justify-content-between" style="margin-bottom:40px">
+    @Html.ActionLink("Добавить окно", "Add", "Window", null, new { @class = "btn btn-primary" })
+    @using (Html.BeginForm("Index", "Home"))
     {
-    var listItem = new SelectListItem();
-    listItem.Text = e.Name;
-    listItem.Value = e.Id.ToString();
-    return listItem;
-    }), new { @class = "form-control-lg", @Name = "ManufactorId", @OnChange = "submit()" })
-        }
+        @Html.DropDownList("ManufactorId", Model.Item2.Select(e =>
+{
+var listItem = new SelectListItem();
+listItem.Text = e.Name;
+listItem.Value = e.Id.ToString();
+return listItem;
+}), new { @class = "form-control-lg", @Name = "ManufactorId", @OnChange = "submit()" })
+    }
 
 
-    </div>
+</div>
 
 
 
@@ -29,7 +29,7 @@
         <div class="col mb-4" id="@window.Id">
             <div class="card">
                 <div>
-                    @Html.ActionLink(window.Id.ToString(), "Show", new { index = window.Id })
+                    @Html.ActionLink(window.Model == null ? "нет модели" : window.Model, "Show", new { index = window.Id })
                 </div>
                 @if (window.Image != null)
                 {

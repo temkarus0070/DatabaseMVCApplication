@@ -87,7 +87,7 @@
             <option selected></option>
             @foreach (var e in Model.Item4)
             {
-                <option value="@e.Id">@String.Format("{0} производитель {1} цвет {2} наличие-{3} цена:{4}", e.Description, e.ManufactorName, e.Color, e.Having ? "В наличии" : "Нет в наличии", e.Price)</option>
+                <option value="@e.Id">@String.Format("Модель- {0} Описание-{1} производитель {2} цвет {3} наличие-{4} цена:{5}",e.Model==null?"неизвестна":e.Model, e.Description, e.ManufactorName, e.Color, e.Having ? "В наличии" : "Нет в наличии", e.Price)</option>
             }
         </select>
 
