@@ -8,6 +8,7 @@ namespace DataBaseMVCApplication.Services
 {
     public class WindowDto
     {
+        public string Model { get; set; }
         public long Id { get; set; }
         public long ManufactorId { get; set; }
         public double Price { get; set; }

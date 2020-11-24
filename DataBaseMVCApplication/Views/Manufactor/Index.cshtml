@@ -5,23 +5,27 @@
     Layout = "~/Views/Shared/ManufactorLayout.cshtml";
 
 }
-
-<div class="row row-cols-1 row-cols-md-3">
+<table class="table table-sm">
+    <tr>
+        <th>Название производителя</th>
+        <th>Телефон</th>
+    </tr>
     @foreach (var manufactor in Model)
     {
-        <div class="col-md-2" id="@manufactor.Id">
-            <div class="card">
-                @Html.ActionLink(manufactor.Id.ToString(), "Show", new { manufactorId = manufactor.Id })
-                <div>Название производителя: @manufactor.Name</div>
-                <div>Телефон: @manufactor.Phone</div>
+        <tr>
+            <td>
+                @Html.ActionLink(manufactor.Name, "Show", new { manufactorId = manufactor.Id })
+            </td>
+
+            <td>@manufactor.Phone</td>
+            <td>
                 <button type="button" onclick="deleteManufactor(@manufactor.Id)" style="background-color: transparent;border:none;">
-                    <img  width="25px" height="25px" src="~/Images/delete.png" />
+                    <img width="25px" height="25px" src="~/Images/delete.png" />
                 </button>
-            </div>
-        </div>
+            </td>
+        </tr>
     }
-</div>
 
-
+</table>
 <script src="~/Scripts/ScriptsForViews/removeEntities.js"></script>
 

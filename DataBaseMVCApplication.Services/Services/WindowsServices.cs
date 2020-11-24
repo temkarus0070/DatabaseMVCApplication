@@ -47,6 +47,7 @@ namespace DataBaseMVCApplication.Services
         {
             var window = new Window()
             {
+                Model = windowDto.Model,
                 Color = windowDto.Color,
                 Description = windowDto.Description,
                 Having = windowDto.Having,

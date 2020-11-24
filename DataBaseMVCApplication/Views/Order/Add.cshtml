@@ -11,29 +11,33 @@
 {
     @Html.AntiForgeryToken()
 
-    <div class="form-horizontal" style="display:inline-block;">
+    <div class="form-horizontal" >
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-        <div class="form-group">
-            <label for="buyerId">Покупатель</label>
-            <select class="form-control" id="buyerId" name="buyerId">
-                <option selected></option>
-                @foreach (var e in Model.Item2)
-                {
-                    <option value="@e.Id">@e.FIO</option>
-                }
-            </select>
+        <div class="form-group row">
+            <label class="col-form-label" for="buyerId">Покупатель</label>
+            <div class="col-sm-10">
+                <select class="form-control" id="buyerId" name="buyerId">
+                    <option selected></option>
+                    @foreach (var e in Model.Item2)
+                    {
+                        <option value="@e.Id">@e.FIO</option>
+                    }
+                </select>
+            </div>
             @Html.RouteLink("Добавить покупателя", new { controller = "Buyer", action = "add" }, new { @class = "btn btn-primary", @target = "_blank" })
         </div>
-        <div class="form-group">
-            <label for="sellerId">Продавец</label>
-            <select class="form-control" id="sellerId" name="sellerId">
-                <option selected></option>
-                @foreach (var e in Model.Item3)
-                {
-                    <option value="@e.Id">@e.FIO</option>
-                }
-            </select>
+        <div class="form-group row">
+            <label for="sellerId" class="col-form-label">Продавец</label>
+            <div class="col-sm-10">
+                <select class="form-control" id="sellerId" name="sellerId">
+                    <option selected></option>
+                    @foreach (var e in Model.Item3)
+                    {
+                        <option value="@e.Id">@e.FIO</option>
+                    }
+                </select>
+            </div>
         </div>
 
 
@@ -42,32 +46,42 @@
 
 
 
-        <div class="form-group">
-            <label class="col-form-label" for="IsDeliver">Нужна доставка</label>
-            <input type="checkbox" class="form-check" name="IsDeliver" id="IsDeliver" />
+        <div class="form-group row">
+            <label  for="IsDeliver">Нужна доставка</label>
+            <div class="col-sm-10">
+                <input type="checkbox" name="IsDeliver" id="IsDeliver" />
+            </div>
         </div>
 
-        <div class="form-group">
-            <label class="col-form-label" for="IsSetup">Нужна установка</label>
-            <input type="checkbox" class="form-check" name="IsSetup" id="IsSetup" />
+        <div class="form-group row">
+            <label for="IsSetup">Нужна установка</label>
+            <div class="col-sm-10">
+                <input type="checkbox" name="IsSetup" id="IsSetup" />
+            </div>
         </div>
 
 
 
-        <div class="form-group">
-            <label for="DeliverDate">Дата доставки</label>
-            <input class="form-control" type="datetime-local" name="DeliverDate" id="DeliverDate" />
-        </div>
+        <div class="form-group row">
+            <label class="col-form-label" for="DeliverDate">Дата доставки</label>
+            <div class="col-sm-10">
+                <input class="form-control" type="datetime-local" name="DeliverDate" id="DeliverDate" />
+            </div>
+            </div>
 
-        <div class="form-group">
-            <label for="SetupDate">Дата установки</label>
-            <input class="form-control" type="datetime-local" name="SetupDate" id="SetupDate" />
-        </div>
+        <div class="form-group row">
+            <label class="col-form-label" for="SetupDate">Дата установки</label>
+            <div class="col-sm-10">
+                <input class="form-control" type="datetime-local" name="SetupDate" id="SetupDate" />
+            </div>
+            </div>
 
-        <div class="form-group">
-            <label for="Price">Цена</label>
-            <input class="form-control" type="number" name="Price" id="Price" disabled step="0.001" />
-        </div>
+        <div class="form-group row">
+            <label class="col-form-label" for="Price">Цена</label>
+            <div class="col-sm-10">
+                <input class="form-control" type="number" name="Price" id="Price" disabled step="0.001" />
+            </div>
+            </div>
 
         <select id="windowsSelect" class="form-control" hidden>
             <option selected></option>

@@ -64,6 +64,10 @@
     <Compile Include="Migrations\202011160624203_ChangeTypeOrderDateAndSetupDate.designer.cs">
       <DependentUpon>202011160624203_ChangeTypeOrderDateAndSetupDate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202011241243263_AddModelToWindow.cs" />
+    <Compile Include="Migrations\202011241243263_AddModelToWindow.designer.cs">
+      <DependentUpon>202011241243263_AddModelToWindow.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="WindowsDatabaseContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -87,6 +91,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202011160624203_ChangeTypeOrderDateAndSetupDate.resx">
       <DependentUpon>202011160624203_ChangeTypeOrderDateAndSetupDate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011241243263_AddModelToWindow.resx">
+      <DependentUpon>202011241243263_AddModelToWindow.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

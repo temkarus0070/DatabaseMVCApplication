@@ -4,20 +4,22 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="d-flex flex-row justify-content-between" style="margin-bottom:40px">
-    @using (Html.BeginForm("Index", "Home"))
-    {
-        @Html.DropDownList("ManufactorId", Model.Item2.Select(e =>
-{
-var listItem = new SelectListItem();
-listItem.Text = e.Name;
-listItem.Value = e.Id.ToString();
-return listItem;
-}), new { @class = "form-control", @Name = "ManufactorId", @OnChange = "submit()" })
-    }
-    @Html.ActionLink("Добавить окно", "Add", "Window", null, new { @class = "btn btn-primary" })
 
-</div>
+    <div class="d-flex flex-row justify-content-between" style="margin-bottom:40px">
+        @Html.ActionLink("Добавить окно", "Add", "Window", null, new { @class = "btn btn-primary" })
+        @using (Html.BeginForm("Index", "Home"))
+        {
+            @Html.DropDownList("ManufactorId", Model.Item2.Select(e =>
+    {
+    var listItem = new SelectListItem();
+    listItem.Text = e.Name;
+    listItem.Value = e.Id.ToString();
+    return listItem;
+    }), new { @class = "form-control-lg", @Name = "ManufactorId", @OnChange = "submit()" })
+        }
+
+
+    </div>
 
 
 
@@ -31,7 +33,7 @@ return listItem;
                 </div>
                 @if (window.Image != null)
                 {
-                    @Html.Raw("<img class=\"card-img-top\" src=\"data:image/jpeg;base64,"
+                    @Html.Raw("<img class=\"card-img-top\" style=\"width:340px;height:340px;\" src=\"data:image/jpeg;base64,"
                                                     + Convert.ToBase64String(window.Image) + "\" />")
                 }
                 <div class="card-body">
@@ -48,7 +50,6 @@ return listItem;
                     </div>
                     <div>Производитель :@window.ManufactorName</div>
                     <div>Цвет : @window.Color</div>
-                    <div>Описание: @window.Description</div>
                     <div>Цена: @window.Price</div>
                     <div>
                         <button type="button" onclick="deleteWindow(@window.Id)" style="background-color: transparent;border:none;">

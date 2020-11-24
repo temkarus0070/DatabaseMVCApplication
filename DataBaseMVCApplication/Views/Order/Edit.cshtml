@@ -10,61 +10,77 @@
 {
     @Html.AntiForgeryToken()
 
-    <div class="form-horizontal" style="display:inline-block;">
+    <div class="form-horizontal">
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.Item1.Id, new { @id = "orderId" })
 
 
-        <div class="form-group">
+        <div class="form-group row">
             <label class="col-form-label" for="buyerId">Покупатель</label>
-            <select id="buyerId" class="form-control">
-                @foreach (var e in Model.Item2)
-                {
-                    <option @(e.Id == Model.Item1.BuyerId ? "selected" : "") value="@e.Id">@e.FIO</option>
-                }
-            </select>
+            <div class="col-sm-10">
+                <select id="buyerId" class="form-control">
+                    @foreach (var e in Model.Item2)
+                    {
+                        <option @(e.Id == Model.Item1.BuyerId ? "selected" : "") value="@e.Id">@e.FIO</option>
+                    }
+                </select>
+            </div>
         </div>
 
-        <div class="form-group">
+        <div class="form-group row">
             <label class="col-form-label" for="sellerId">Продавец</label>
-            <select class="form-control" id="sellerId">
-                @foreach (var e in Model.Item3)
-                {
-                    <option @(e.Id == Model.Item1.SellerId ? "selected" : "") value="@e.Id">@e.FIO</option>
-                }
-            </select>
+            <div class="col-sm-10">
+                <select class="form-control" id="sellerId">
+                    @foreach (var e in Model.Item3)
+                    {
+                        <option @(e.Id == Model.Item1.SellerId ? "selected" : "") value="@e.Id">@e.FIO</option>
+                    }
+                </select>
+            </div>
         </div>
-        <div class="form-group">
-            <label for="IsDeliver">Нужна доставка</label>
-            <input class="form-check" type="checkbox" id="IsDeliver" @(Model.Item1.IsDeliver ? "checked" : "") />
+        <div class="form-group row">
+            <label  for="IsDeliver">Нужна доставка</label>
+            <div class="col-sm-10">
+                <input  type="checkbox" id="IsDeliver" @(Model.Item1.IsDeliver ? "checked" : "") />
+            </div>
         </div>
 
-        <div class="form-group">
+        <div class="form-group row">
             <label for="IsSetup">Нужна установка</label>
-            <input class="form-check" type="checkbox" id="IsSetup" @(Model.Item1.IsSetup ? "checked" : "") />
+            <div class="col-sm-10">
+                <input type="checkbox" id="IsSetup" @(Model.Item1.IsSetup ? "checked" : "") />
+            </div>
         </div>
 
-        <div class="form-group">
-            <label for="OrderDate">Дата заказа</label>
-            <input class="form-control" type="datetime-local" id="OrderDate" value="@String.Format("{0}-{1}-{2}T{3}:{4}", Model.Item1.OrderDate.Year, Model.Item1.OrderDate.Month<10?"0"+Model.Item1.OrderDate.Month.ToString():Model.Item1.OrderDate.Month.ToString(), Model.Item1.OrderDate.Day<10?"0"+Model.Item1.OrderDate.Day.ToString():Model.Item1.OrderDate.Day.ToString(), Model.Item1.OrderDate.Hour==0 || Model.Item1.OrderDate.Hour<10?"0"+Model.Item1.OrderDate.Hour.ToString():Model.Item1.OrderDate.Hour.ToString(), Model.Item1.OrderDate.Minute==0 || Model.Item1.OrderDate.Minute<10 ?"0"+Model.Item1.OrderDate.Minute.ToString():Model.Item1.OrderDate.Minute.ToString())" />
-        </div>
+        <div class="form-group row">
+            <label class="col-form-label" for="OrderDate">Дата заказа</label>
+            <div class="col-sm-10">
+                <input class="form-control" type="datetime-local" id="OrderDate" value="@String.Format("{0}-{1}-{2}T{3}:{4}", Model.Item1.OrderDate.Year, Model.Item1.OrderDate.Month<10?"0"+Model.Item1.OrderDate.Month.ToString():Model.Item1.OrderDate.Month.ToString(), Model.Item1.OrderDate.Day<10?"0"+Model.Item1.OrderDate.Day.ToString():Model.Item1.OrderDate.Day.ToString(), Model.Item1.OrderDate.Hour==0 || Model.Item1.OrderDate.Hour<10?"0"+Model.Item1.OrderDate.Hour.ToString():Model.Item1.OrderDate.Hour.ToString(), Model.Item1.OrderDate.Minute==0 || Model.Item1.OrderDate.Minute<10 ?"0"+Model.Item1.OrderDate.Minute.ToString():Model.Item1.OrderDate.Minute.ToString())" />
+            </div>
+            </div>
 
-        <div class="form-group">
-            <label for="DeliverDate">Дата доставки</label>
-            <input class="form-control" type="datetime-local" value="@if (Model.Item1.DeliverDate != null)
+        <div class="form-group row">
+            <label class="col-form-label" for="DeliverDate">Дата доставки</label>
+            <div class="col-sm-10">
+                <input class="form-control" type="datetime-local" value="@if (Model.Item1.DeliverDate != null)
               {@String.Format("{0}-{1}-{2}T{3}:{4}", Model.Item1.DeliverDate.Value.Year, Model.Item1.DeliverDate.Value.Month<10?"0"+Model.Item1.DeliverDate.Value.Month.ToString():Model.Item1.DeliverDate.Value.Month.ToString(), Model.Item1.DeliverDate.Value.Day<10?"0"+Model.Item1.DeliverDate.Value.Day.ToString():Model.Item1.DeliverDate.Value.Day.ToString(), Model.Item1.DeliverDate.Value.Hour==0 || Model.Item1.DeliverDate.Value.Hour<10?"0"+Model.Item1.DeliverDate.Value.Hour.ToString():Model.Item1.DeliverDate.Value.Hour.ToString(), Model.Item1.DeliverDate.Value.Minute==0 || Model.Item1.DeliverDate.Value.Hour<10?"0"+Model.Item1.DeliverDate.Value.Minute.ToString():Model.Item1.DeliverDate.Value.Minute.ToString())}" id="DeliverDate" />
-        </div>
+            </div>
+            </div>
 
-        <div class="form-group">
-            <label for="SetupDate">Дата установки</label>
-            <input type="datetime-local" class="form-control" id="SetupDate" value="@if (Model.Item1.SetupDate != null)
+        <div class="form-group row">
+            <label class="col-form-label" for="SetupDate">Дата установки</label>
+            <div class="col-sm-10">
+                <input type="datetime-local" class="form-control" id="SetupDate" value="@if (Model.Item1.SetupDate != null)
                 {@String.Format("{0}-{1}-{2}T{3}:{4}", Model.Item1.SetupDate.Value.Year, Model.Item1.SetupDate.Value.Month<10?"0"+Model.Item1.SetupDate.Value.Month.ToString():Model.Item1.SetupDate.Value.Month.ToString(), Model.Item1.SetupDate.Value.Day<10?"0"+Model.Item1.SetupDate.Value.Day.ToString():Model.Item1.SetupDate.Value.Day.ToString(), Model.Item1.SetupDate.Value.Hour==0 || Model.Item1.SetupDate.Value.Hour<10?"0"+Model.Item1.SetupDate.Value.Hour.ToString():Model.Item1.SetupDate.Value.Hour.ToString(), Model.Item1.SetupDate.Value.Minute==0 || Model.Item1.SetupDate.Value.Minute<10?"0"+Model.Item1.SetupDate.Value.Minute.ToString():Model.Item1.SetupDate.Value.Minute.ToString())}" />
-        </div>
+            </div>
+            </div>
 
-        <div class="form-group">
-            <label for="Price">Цена</label>
-            <input class="form-control" disabled type="number" step="0.001" id="Price" value="@Model.Item1.Price.ToString().Replace(",", ".")" />
-        </div>
+        <div class="form-group row">
+            <label class="col-form-label" for="Price">Цена</label>
+            <div class="col-sm-10">
+                <input class="form-control" disabled type="number" step="0.001" id="Price" value="@Model.Item1.Price.ToString().Replace(",", ".")" />
+            </div>
+            </div>
 
         <div style="margin-bottom:40px">
             <button type="button" class="btn-outline-dark" onclick="addPositionOrder()">Добавить позицию заказа</button>

@@ -8,6 +8,7 @@ namespace DataBaseMVCApplication.ViewModels
 {
     public class WindowViewModel
     {
+        public string Model { get; set; }
         public long Id { get; set; }
         public long ManufactorId { get; set; }
         [DisplayName("Название производителя")]

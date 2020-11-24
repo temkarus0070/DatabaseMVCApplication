@@ -10,47 +10,64 @@
 @using (Html.BeginForm("Add", "Window", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
-    <div class="form-horizontal" style="display:inline-block;">
+    <div class="form-horizontal" >
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
+        <div class="form-group row">
             @Html.Label("Производитель", htmlAttributes: new { @class = "control-label col-md-2" })
-            @Html.DropDownList("Manufactor",
-           Model.Item2.Select(m => new SelectListItem() { Value = m.Id.ToString(), Text = m.Name })
-           , new { @class = "form-control", @Name = "manufactorId" })
+            <div class="col-sm-10">
+                @Html.DropDownList("Manufactor",
+               Model.Item2.Select(m => new SelectListItem() { Value = m.Id.ToString(), Text = m.Name })
+               , new { @class = "form-control", @Name = "manufactorId" })
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label" for="Model">Модель</label>
+            <div class="col-sm-10">
+                <input class="form-control" type="text" id="Model" name="Model" />
+            </div>
         </div>
 
-        <div class="form-group">
-            <label for="Image">Изображение</label>
-
-            <input type="file" id="Image" class="form-control-file" name="UploadImage" />
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label" for="Image">Изображение</label>
+            <div class="col-sm-10">
+                <input type="file" id="Image" class="form-control-file" name="UploadImage" />
+            </div>
         </div>
 
 
-        <div class="form-group">
+        <div class="form-group row">
             @Html.LabelFor(model => model.Item1.Price, htmlAttributes: new { @class = "control-label col-md-2" })
-            @Html.EditorFor(model => model.Item1.Price, new { htmlAttributes = new { @class = "form-control", @Name = "Price" } })
-            @Html.ValidationMessageFor(model => model.Item1.Price, "", new { @class = "text-danger" })
+            <div class="col-sm-10">
+                @Html.EditorFor(model => model.Item1.Price, new { htmlAttributes = new { @class = "form-control", @Name = "Price" } })
+                @Html.ValidationMessageFor(model => model.Item1.Price, "", new { @class = "text-danger" })
+            </div>
         </div>
 
-        <div class="form-group">
+        <div class="form-group row">
             @Html.LabelFor(model => model.Item1.Color, htmlAttributes: new { @class = "control-label col-md-2" })
-            @Html.EditorFor(model => model.Item1.Color, new { htmlAttributes = new { @class = "form-control", @Name = "Color" } })
-            @Html.ValidationMessageFor(model => model.Item1.Color, "", new { @class = "text-danger" })
+            <div class="col-sm-10">
+                @Html.EditorFor(model => model.Item1.Color, new { htmlAttributes = new { @class = "form-control", @Name = "Color" } })
+                @Html.ValidationMessageFor(model => model.Item1.Color, "", new { @class = "text-danger" })
+            </div>
+            </div>
+
+
+        <div class="form-group row">
+            @Html.LabelFor(model => model.Item1.Having, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-sm-10">
+                @Html.EditorFor(model => model.Item1.Having, new { htmlAttributes = new { @Name = "Having" } })
+            </div>
+            </div>
+
+        <div class="form-group row">
+            <label class="control-label col-md-2" for="model.Item1.Description">Описание</label>
+            <div class="col-sm-10">
+                <textarea class="form-control" cols="990" name="Description" id="Description"></textarea>
+            </div>
+
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Item1.Having)
-
-            @Html.EditorFor(model => model.Item1.Having, new { htmlAttributes = new { @Name = "Having", @class = "form-check" } })
-        </div>
-
-        <div class="form-group">
-            <label for="model.Item1.Description">Описание</label>
-            <textarea class="form-control" cols="990" name="Description" id="Description"></textarea>
-
-        </div>
-
-        <div class="form-group">
+        <div class="form-group row">
             <input type="submit" value="Добавить" class="btn btn-primary" />
         </div>
     </div>
