@@ -5,109 +5,110 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div  >
-<div >
-    <dl class="dl-horizontal" >
-        <dt>
-            @Html.DisplayName("Продавец")
-        </dt>
+    <div >
+        <div>
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayName("Продавец")
+                </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Item1.Seller.FIO)
-        </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.Item1.Seller.FIO)
+                </dd>
 
-        <dt>
-            @Html.DisplayName("Покупатель")
-        </dt>
+                <dt>
+                    @Html.DisplayName("Покупатель")
+                </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Item1.Buyer.FIO)
-        </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.Item1.Buyer.FIO)
+                </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Item1.IsDeliver)
-        </dt>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Item1.IsDeliver)
+                </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Item1.IsDeliver)
-        </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.Item1.IsDeliver)
+                </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Item1.IsSetup)
-        </dt>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Item1.IsSetup)
+                </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Item1.IsSetup)
-        </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.Item1.IsSetup)
+                </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Item1.OrderDate)
-        </dt>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Item1.OrderDate)
+                </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Item1.OrderDate)
-        </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.Item1.OrderDate)
+                </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Item1.DeliverDate)
-        </dt>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Item1.DeliverDate)
+                </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Item1.DeliverDate)
-        </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.Item1.DeliverDate)
+                </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Item1.SetupDate)
-        </dt>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Item1.SetupDate)
+                </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Item1.SetupDate)
-        </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.Item1.SetupDate)
+                </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Item1.Price)
-        </dt>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Item1.Price)
+                </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Item1.Price)
-        </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.Item1.Price)
+                </dd>
 
-    </dl>
-</div>
-<div  >
-    <p>Позиции заказа</p>
-    <table class="table table-sm" >
-        <tr>
-            <th>Окно</th>
-            <th>Длина</th>
-            <th>Ширина</th>
-        </tr>
-        @foreach (var e in Model.Item2)
-        {
-        <tr >
-            <td >
-                @if (e.Window.Image != null)
+            </dl>
+        </div>
+        <div>
+            <p>Позиции заказа</p>
+            <table class="table table-sm">
+                <tr>
+                    <th>Окно</th>
+                    <th>Длина</th>
+                    <th>Ширина</th>
+                </tr>
+                @foreach (var e in Model.Item2)
                 {
-                    @Html.Raw("<img width=25% src=\"data:image/jpeg;base64,"
-                                                     + Convert.ToBase64String(e.Window.Image) + "\" />")
-                }
+                    <tr>
+                        <td>
+                            @if (e.Window.Image != null)
+                            {
+                                @Html.Raw("<img width=25% src=\"data:image/jpeg;base64,"
+                                                                 + Convert.ToBase64String(e.Window.Image) + "\" />")
+                            }
 
-                <p>Производитель: @e.Window.ManufactorName</p>
-                <p>@e.Window.Description</p>
-                <p>Цвет: @e.Window.Color</p>
-                <p>Наличие: @(e.Window.Having?"В наличии":"Нет в наличии")</p>
-                <p>Цена: @e.Window.Price рублей</p>
-            </td>
-            <td>
-                <p>@e.Width</p>
-              
-            </td>
-            <td>  <p>@e.Length</p></td>
-        </tr>
-        }
-    </table>
-</div>
-<p>
-    @Html.ActionLink("Редактировать", "Edit", new { orderId = Model.Item1.Id },new { @class="btn btn-primary" }) 
-</p>
-</div>
+                            <p>Производитель: @e.Window.ManufactorName</p>
+                            <p>@e.Window.Description</p>
+                            <p>Цвет: @e.Window.Color</p>
+                            <p>Наличие: @(e.Window.Having ? "В наличии" : "Нет в наличии")</p>
+                            <p>Цена: @e.Window.Price рублей</p>
+                        </td>
+                        <td>
+                            <p>@e.Width</p>
+
+                        </td>
+                        <td>  <p>@e.Length</p></td>
+                    </tr>
+                }
+            </table>
+
+        </div>
+        <div style="margin-left:148px">
+            @Html.ActionLink("Редактировать", "Edit", new { orderId = Model.Item1.Id }, new { @class = "btn btn-primary" })
+        </div>
+        </div>
