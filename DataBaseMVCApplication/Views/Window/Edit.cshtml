@@ -28,16 +28,16 @@
 
 
         <div class="form-group row">
-            @Html.Label("Модель")
+            @Html.Label("Модель",new { @class="col-form-label"})
             <div class="col-sm-10">
                 @Html.EditorFor(model=>model.Model, new { htmlAttributes = new { @class = "form-control" } })
             </div>
         </div>
 
         <div class="form-group row">
-            @Html.Label("Изображение", htmlAttributes: new { @class = "col-form-label" })
+            @Html.Label("Изображение", htmlAttributes: new { @class = "col-form-label", @style = "margin-right:15px" })
             <div class="col-sm-10">
-                <input type="file" name="UploadImage" />
+                <input type="file" class="form-control" name="UploadImage" />
             </div>
         </div>
 
@@ -52,19 +52,14 @@
         <div class="form-group row">
             @Html.Label("Цвет", htmlAttributes: new { @class = "col-form-label" })
             <div class="col-sm-10">
-                @Html.EditorFor(model => model.Color, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.Color, new { htmlAttributes = new { @class = "form-control" } } )
                 @Html.ValidationMessageFor(model => model.Color, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group row">
-            @Html.Label("Есть в наличии")
-            <div class="col-sm-10">
-                <div class="checkbox">
-                    @Html.EditorFor(model => model.Having)
-                    @Html.ValidationMessageFor(model => model.Having, "", new { @class = "text-danger" })
-                </div>
-            </div>
+            @Html.Label("Есть в наличии", htmlAttributes: new {@style="margin-right:15px"})
+            @Html.EditorFor(model => model.Having,new { htmlAttrubutes = new { @class = "form-control"} })
         </div>
 
         <div class="form-group row">

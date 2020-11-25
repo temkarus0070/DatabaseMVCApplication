@@ -91,7 +91,7 @@
                 <option selected></option>
                 @foreach (var e in Model.Item4)
                 {
-                    <option value="@e.Id">@String.Format("модель-{0} описание-{1} производитель {2} цвет {3} наличие-{4} цена:{5}",e.Model==null?"неизвестна":e.Model, e.Description, e.ManufactorName, e.Color, e.Having ? "В наличии" : "Нет в наличии", e.Price)</option>
+                    <option value="@e.Id">@String.Format("модель-{0} производитель {1} цвет {2} наличие-{3} цена:{4}",e.Model==null?"неизвестна":e.Model, e.ManufactorName, e.Color, e.Having ? "В наличии" : "Нет в наличии", e.Price)</option>
                 }
             </select>
 
@@ -113,7 +113,7 @@
                                     {
                                         <option @(e.WindowId == window.Id ? "selected" : "")
                                                 value="@window.Id">
-                                            @String.Format("Модель-{0} Описание-{1} Производитель {2} цвет {3} наличие-{4} цена:{5}",window.Model==null?"неизвестна":window.Model, window.Description, window.ManufactorName, window.Color, window.Having ? "В наличии" : "Нет в наличии", window.Price)
+                                            @String.Format("Модель-{0} Производитель {1} цвет {2} наличие-{3} цена:{4}",window.Model==null?"неизвестна":window.Model, window.ManufactorName, window.Color, window.Having ? "В наличии" : "Нет в наличии", window.Price)
                                         </option>
                                     }
                                 </select>
@@ -134,10 +134,8 @@
             </table>
             <input type="button" value="Обновить позиции заказа" class="btn-dark" onclick="updateOrderPositions()" />
         </div>
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
+        <div class="form-group" style="margin-left:144px;">
                 <input type="button" value="Сохранить" class="btn btn-primary" onclick="sendData()" />
-            </div>
         </div>
     </div>
 }

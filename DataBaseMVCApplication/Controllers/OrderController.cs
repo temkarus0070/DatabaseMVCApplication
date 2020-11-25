@@ -68,6 +68,7 @@ namespace DataBaseMVCApplication.Controllers
 
 
             });
+            windows.OrderBy(e => e.ManufactorName);
 
             foreach (var e in buyersData)
             {
@@ -196,6 +197,7 @@ namespace DataBaseMVCApplication.Controllers
 
 
             });
+            windows.OrderBy(e => e.ManufactorName);
 
             var order = services.orderService.GetOrder(orderId);
             var orderPositions = services.orderPositionService.GetOrderPositions(orderId);
